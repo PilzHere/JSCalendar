@@ -1,2 +1,3 @@
 # JSCalendar
 A school team project.
+It's supposed to be a calendar...
