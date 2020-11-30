@@ -17,4 +17,8 @@ Vilka kunskaper känner du fick av detta projekt?
 ------------------
 
 30-11-2020
-bla bla bla
+Allt gick bra förutom att Robin inte kunde vara med på vårt första möte.
+Trello är uppe ioch jag är ansvarig för den denna veckan.
+Vi använder tabspace: 4 och Prettier extension i VSCode.
+Vi ska börja jobba på projektet imorgon klockan 9.
+
