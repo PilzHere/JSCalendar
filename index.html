@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>JSCalendar</title>
+		<meta name="description" content="This is a calendar." />
+		<meta name="keywords" content="calendar, javascript" />
+		<meta name="robots" content="index, follow" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-
 		<link rel="stylesheet" href="css/styles.css" />
 		<script defer src="js/calendar.js"></script>
 	</head>
-	<body></body>
+	<body>
+		<div class="mainWrapper">
+			JSCalendar
+			<div class="currentDayWrapper">
+				<label for="selectedDateLabel">Monday 1st</label>
+				<textarea
+					id="selectedDateTextArea"
+					name="selectedDateTextArea2"
+					rows="7"
+					cols="50"
+					placeholder="Display notes for the selected date here..."
+				></textarea>
+			</div>
+
+			<div class="monthWrapper">
+				<label for="selectedMonth" id="selectedMonth">June 2021</label>
+				<div class="grid-container">
+					<button class="btnDay1">1</button>
+					<button class="btnDay2">2</button>
+					<button class="btnDay3">3</button>
+					<button class="btnDay4">4</button>
+					<button class="btnDay5">5</button>
+					<button class="btnDay6">6</button>
+					<button class="btnDay7">7</button>
+					<button class="btnDay8">8</button>
+					<button class="btnDay9">9</button>
+					<button class="btnDay10">10</button>
+					<button class="btnDay11">11</button>
+					<button class="btnDay12">12</button>
+					<button class="btnDay13">13</button>
+					<button class="btnDay14">14</button>
+					<button class="btnDay15">15</button>
+					<button class="btnDay16">16</button>
+					<button class="btnDay17">17</button>
+					<button class="btnDay18">18</button>
+					<button class="btnDay19">19</button>
+					<button class="btnDay20">20</button>
+					<button class="btnDay21">21</button>
+					<button class="btnDay22">22</button>
+					<button class="btnDay23">23</button>
+					<button class="btnDay24">24</button>
+					<button class="btnDay25">25</button>
+					<button class="btnDay26">26</button>
+					<button class="btnDay27">27</button>
+					<button class="btnDay28">28</button>
+					<button class="btnDay29">29</button>
+					<button class="btnDay30">30</button>
+					<button class="btnDay31">31</button>
+				</div>
+			</div>
+
+			<div class="monthButtonsWrapper">
+				<button class="btnPreviousMonth" id="btnPreviousMonth">
+					Previous month
+				</button>
+				<button class="btnNextMonth" id="btnNextMonth">
+					Next month
+				</button>
+			</div>
+		</div>
+	</body>
 </html>
