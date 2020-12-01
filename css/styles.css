@@ -11,26 +11,35 @@ body {
 	margin-top: 0;
 }
 
-.mainWrapper {
+#mainWrapper {
 	margin-left: 3%;
 	margin-right: 3%;
+	background-color: red;
 }
 
-.monthButtonsWrapper {
+#currentDayWrapper {
+	background-color: #d0d0d0;
+}
+
+#monthButtonsWrapper {
 	background-color: lightgreen;
 	text-align: center;
 	margin-top: 10px;
 }
 
-.mainWrapper .currentDayWrapper textarea {
-	background-color: lightgray;
+#selectedDateTextArea {
 	width: 98%;
-	height: 200px;
+	height: 175px;
 	resize: none;
 }
 
+#daysLabel {
+	text-align: center;
+	background-color: seagreen;
+}
+
 @media only screen and (max-width: 320px) {
-	.grid-container {
+	#monthGrid {
 		/*background-color: burlywood;*/
 		display: grid;
 		grid-template-columns: 42px 42px 42px 42px 42px 42px 42px;
@@ -38,12 +47,12 @@ body {
 		height: 250px;
 	}
 
-	.monthWrapper {
+	#monthWrapper {
 		background-color: darkgoldenrod;
-		width: 100%;
+		/*width: 100%;*/
 	}
 
-	.grid-container > * {
+	#monthGrid > * {
 		background-color: cadetblue;
 		width: 100%;
 		height: 100%;
