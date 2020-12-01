@@ -1,7 +1,11 @@
 "use_strict";
 
 const appName = "JSCalendar";
+
 const today = new Date(); // Time right now.
+let currentMonth = today.getMonth() + 1;
+let currentYear = today.getFullYear();
+
 const monthCells = [7 * 5];
 let oldMonthAmountOfDays = 0;
 
@@ -98,6 +102,11 @@ function initWebsite() {
 		nextMonthEvent();
 	});
 	document.getElementById("monthButtonsWrapper").appendChild(btnNextMonth);
+
+	selectedMonthLabel.innerHTML =
+		MONTHNAMES[today.getMonth()] + " " + today.getFullYear();
+
+	console.log("this month: " + currentMonth);
 }
 
 let getDaysInMonth = function (month, year) {
@@ -107,11 +116,11 @@ let getDaysInMonth = function (month, year) {
 //console.log(getDaysInMonth(today.getMonth(), today.getFullYear()));
 
 function previousMonthEvent() {
+	currentMonth--;
+
 	if (currentMonth == 0) {
 		currentYear--;
-		currentMonth = 11;
-	} else {
-		currentMonth--;
+		currentMonth = 12;
 	}
 
 	today.setMonth(currentMonth);
@@ -121,15 +130,15 @@ function previousMonthEvent() {
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
-	console.log(currentMonth);
+	console.log("this month: " + currentMonth);
 }
 
 function nextMonthEvent() {
-	if (currentMonth == 11) {
+	currentMonth++;
+
+	if (currentMonth == 13) {
 		currentYear++;
-		currentMonth = 0;
-	} else {
-		currentMonth++;
+		currentMonth = 1;
 	}
 
 	today.setMonth(currentMonth);
@@ -139,16 +148,8 @@ function nextMonthEvent() {
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
-	console.log(currentMonth);
+	console.log("this month: " + currentMonth);
 }
-
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
-
-initWebsite();
-
-selectedMonthLabel.innerHTML =
-	MONTHNAMES[today.getMonth()] + " " + today.getFullYear();
 
 function updateMonthGrid(amountOfDaysInMonth) {
 	if (document.getElementById("monthGrid").hasChildNodes) {
@@ -189,6 +190,8 @@ function updateMonthGrid(amountOfDaysInMonth) {
 
 	oldMonthAmountOfDays = amountOfDaysInMonth;
 }
+
+initWebsite();
 
 /*
 function getCurrentTime() {
