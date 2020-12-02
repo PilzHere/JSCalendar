@@ -1,5 +1,7 @@
 "use_strict";
 
+
+
 const appName = "JSCalendar";
 
 const today = new Date(); // Time right now.
@@ -203,3 +205,22 @@ function getCurrentTime() {
 */
 
 //getCurrentTime();
+
+
+
+
+
+// NOT WORKING YET
+function getWeekNumber(d) {
+	d = new Date(2020, 11, 1) // Copy date so don't modify original.
+	d.setHours(0, 0, 0, 0) // Reset hours.
+	var yearStart = new Date(d.getFullYear(), 0, 1) // Get first day of year
+	console.log((((d - yearStart) / 86400000)+ 1)); // Testing results
+	var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7) // Calculate full weeks to nearest Thursday
+	return weekNo // Return week number
+  }
+  
+  var date = new Date()
+  var week = getWeekNumber(date)
+
+  console.log(week);
