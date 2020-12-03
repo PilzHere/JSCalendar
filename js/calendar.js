@@ -191,8 +191,33 @@ function updateMonthGrid(amountOfDaysInMonth) {
 	oldMonthAmountOfDays = amountOfDaysInMonth;
 }
 
-initWebsite();
+function displayRedWeekend()
+{
 
+	for(day = 0; day < 32; day++)
+	{
+		var d = new Date(2020, 11, day);
+		if(d.getDay() == 0 || d.getDay() == 6)
+		{
+			try{
+				var buttonId = "btnDay" + day;
+				document.getElementById(buttonId).style.background = "red";
+			}catch(err)
+			{
+
+			}
+		}
+	}
+
+	if(document.getElementById("btnNextMonth").click)
+	{
+		setInterval(displayRedWeekend);
+	}
+	
+}
+
+initWebsite();
+displayRedWeekend();
 /*
 function getCurrentTime() {
 	const fullDate = today.toISOString().slice(0, 10);
