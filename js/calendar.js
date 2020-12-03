@@ -25,6 +25,34 @@ const MONTHNAMES = [
 	"December",
 ];
 
+function Day(dayNumber, monthNumber, yearNumber, notes) {
+	this.dayNumber = dayNumber;
+	this.monthNumber = monthNumber;
+	this.yearNumber = yearNumber;
+	this.notes = notes;
+
+	Day.updateNotes = function (newNotes) {
+		this.notes = newNotes;
+	};
+}
+
+let registeredDays = [];
+let newDay = new Day(20, 12, 2020, "This is a note."); // Test
+registeredDays.push(newDay);
+
+registeredDays.forEach((day) => {
+	console.log(
+		"Day: " +
+			day.dayNumber +
+			"\nMonth: " +
+			day.monthNumber +
+			"\nYear: " +
+			day.yearNumber +
+			"\nNotes: " +
+			day.notes
+	);
+});
+
 function initWebsite() {
 	const mainWrapper = document.createElement("div");
 	mainWrapper.tagName = "mainWrapper";
