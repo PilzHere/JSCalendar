@@ -300,5 +300,6 @@ function displayWeekNumbers() {
         weekNumbers[i].className = "weekNumbers";
         weekNumbers[i].textContent = getWeekNumber(new Date());
         document.getElementById("weekGrid").appendChild(weekNumbers[i]);
+        
     }
 }
