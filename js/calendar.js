@@ -71,10 +71,20 @@ function initWebsite() {
     daysLabel.innerHTML = "<br>Mon Tue Wed Thu Fri Sat Sun";
     document.getElementById("monthWrapper").appendChild(daysLabel);
 
+    const weekAndMonthGrid = document.createElement("grid-container");
+    weekAndMonthGrid.tagName = "weekAndMonthGrid";
+    weekAndMonthGrid.id = "weekAndMonthGrid";
+    document.getElementById("monthWrapper").appendChild(weekAndMonthGrid);
+
+    const weekGrid = document.createElement("grid-container");
+    weekGrid.tagName = "weekGrid";
+    weekGrid.id = "weekGrid";
+    document.getElementById("weekAndMonthGrid").appendChild(weekGrid);
+
     const monthGrid = document.createElement("grid-container");
     monthGrid.tagName = "monthGrid";
     monthGrid.id = "monthGrid";
-    document.getElementById("monthWrapper").appendChild(monthGrid);
+    document.getElementById("weekAndMonthGrid").appendChild(monthGrid);
 
     updateMonthGrid(getDaysInMonth(today.getMonth(), today.getFullYear()));
 
@@ -189,6 +199,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
     }
 
     oldMonthAmountOfDays = amountOfDaysInMonth;
+    displayWeekNumbers();
 }
 
 initWebsite();
@@ -228,3 +239,13 @@ function getWeekNumber(d) {
 }
 
 console.log(getWeekNumber(new Date())); // Testing week number for current date
+
+function displayWeekNumbers() {
+    var weekNumbers = [];
+    for (i = 0; i < 5; i++) {
+        weekNumbers[i] = document.createElement("h4");
+        weekNumbers[i].className = "weekNumbers";
+        weekNumbers[i].textContent = getWeekNumber(new Date());
+        document.getElementById("weekGrid").appendChild(weekNumbers[i]);
+    }
+}
