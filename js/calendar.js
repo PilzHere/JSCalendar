@@ -227,7 +227,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
     }
 
     oldMonthAmountOfDays = amountOfDaysInMonth;
-    displayWeekNumbers();
+
 }
 
 function displayRedWeekend()
@@ -257,6 +257,7 @@ function displayRedWeekend()
 
 initWebsite();
 displayRedWeekend();
+displayWeekNumbers();
 /*
 function getCurrentTime() {
 	const fullDate = today.toISOString().slice(0, 10);
@@ -300,6 +301,6 @@ function displayWeekNumbers() {
         weekNumbers[i].className = "weekNumbers";
         weekNumbers[i].textContent = getWeekNumber(new Date());
         document.getElementById("weekGrid").appendChild(weekNumbers[i]);
-        
+
     }
 }
