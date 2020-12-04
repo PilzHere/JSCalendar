@@ -271,6 +271,7 @@ function getCurrentTime() {
 
 // Returning week number of the date you send to the function
 function getWeekNumber(d) {
+    const dayInMilliseconds = 86400000; // 60 sec * 60 min * 24 hours * 1000 to get a day in ms.
     let currentDate = new Date(d);
     currentDate.setHours(0, 0, 0, 0);
     // Thursday in current week decides the year.
@@ -280,10 +281,11 @@ function getWeekNumber(d) {
     // January 4th is always in week 1.
     let week1 = new Date(currentDate.getFullYear(), 0, 4);
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.,
+    console.log((currentDate.getTime() - week1.getTime()) / dayInMilliseconds);
     return (
         1 +
         Math.round(
-            ((currentDate.getTime() - week1.getTime()) / 86400000 -
+            ((currentDate.getTime() - week1.getTime()) / dayInMilliseconds -
                 3 +
                 ((week1.getDay() + 6) % 7)) /
                 7
