@@ -26,14 +26,14 @@ const MONTHNAMES = [
 ];
 
 function Day(dayNumber, monthNumber, yearNumber, notes) {
-	this.dayNumber = dayNumber;
-	this.monthNumber = monthNumber;
-	this.yearNumber = yearNumber;
-	this.notes = notes;
+    this.dayNumber = dayNumber;
+    this.monthNumber = monthNumber;
+    this.yearNumber = yearNumber;
+    this.notes = notes;
 
-	Day.updateNotes = function (newNotes) {
-		this.notes = newNotes;
-	};
+    Day.updateNotes = function (newNotes) {
+        this.notes = newNotes;
+    };
 }
 
 let registeredDays = [];
@@ -41,16 +41,16 @@ let newDay = new Day(20, 12, 2020, "This is a note."); // Test
 registeredDays.push(newDay);
 
 registeredDays.forEach((day) => {
-	console.log(
-		"Day: " +
-			day.dayNumber +
-			"\nMonth: " +
-			day.monthNumber +
-			"\nYear: " +
-			day.yearNumber +
-			"\nNotes: " +
-			day.notes
-	);
+    console.log(
+        "Day: " +
+            day.dayNumber +
+            "\nMonth: " +
+            day.monthNumber +
+            "\nYear: " +
+            day.yearNumber +
+            "\nNotes: " +
+            day.notes
+    );
 });
 
 function initWebsite() {
@@ -127,6 +127,7 @@ function initWebsite() {
     btnPreviousMonth.innerHTML = "<< Previous Month";
     btnPreviousMonth.addEventListener("click", function () {
         previousMonthEvent();
+        updateWeekNumbers();
     });
     document
         .getElementById("monthButtonsWrapper")
@@ -138,6 +139,7 @@ function initWebsite() {
     btnNextMonth.innerHTML = "Next Month >>";
     btnNextMonth.addEventListener("click", function () {
         nextMonthEvent();
+        updateWeekNumbers();
     });
     document.getElementById("monthButtonsWrapper").appendChild(btnNextMonth);
 
@@ -227,32 +229,22 @@ function updateMonthGrid(amountOfDaysInMonth) {
     }
 
     oldMonthAmountOfDays = amountOfDaysInMonth;
-
 }
 
-function displayRedWeekend()
-{
+function displayRedWeekend() {
+    for (day = 0; day < 32; day++) {
+        var d = new Date(2020, 11, day);
+        if (d.getDay() == 1 || d.getDay() == 0) {
+            try {
+                var buttonId = "btnDay" + day;
+                document.getElementById(buttonId).style.background = "red";
+            } catch (err) {}
+        }
+    }
 
-	for(day = 0; day < 32; day++)
-	{
-		var d = new Date(2020, 11, day);
-		if(d.getDay() == 1 || d.getDay() == 0)
-		{
-			try{
-				var buttonId = "btnDay" + day;
-				document.getElementById(buttonId).style.background = "red";
-			}catch(err)
-			{
-
-			}
-		}
-	}
-
-	if(document.getElementById("btnNextMonth").click)
-	{
-		setInterval(displayRedWeekend);
-	}
-	
+    if (document.getElementById("btnNextMonth").click) {
+        setInterval(displayRedWeekend);
+    }
 }
 
 initWebsite();
@@ -281,7 +273,6 @@ function getWeekNumber(d) {
     // January 4th is always in week 1.
     let week1 = new Date(currentDate.getFullYear(), 0, 4);
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.,
-    console.log((currentDate.getTime() - week1.getTime()) / dayInMilliseconds);
     return (
         1 +
         Math.round(
@@ -293,15 +284,27 @@ function getWeekNumber(d) {
     );
 }
 
-console.log(getWeekNumber(new Date())); // Testing week number for current date
-
 function displayWeekNumbers() {
     var weekNumbers = [];
-    for (i = 0; i < 32; i += 7) {
+    var week = 1;
+    for (i = 1; i < 32; i += 7) {
         weekNumbers[i] = document.createElement("h4");
         weekNumbers[i].className = "weekNumbers";
-        weekNumbers[i].textContent = getWeekNumber(new Date(currentYear, currentMonth - 1, i));
+        weekNumbers[i].id = "week" + week++;
+        weekNumbers[i].textContent = getWeekNumber(
+            new Date(currentYear, currentMonth - 1, i)
+        );
         document.getElementById("weekGrid").appendChild(weekNumbers[i]);
+    }
+}
 
+function updateWeekNumbers() {
+    let date = 1;
+    let oneWeek = 7;
+    for (i = 1; i <= 5; i++) {
+        document.getElementById("week" + i).textContent = getWeekNumber(
+            new Date(currentYear, currentMonth - 1, date)
+        );
+        date += oneWeek;
     }
 }

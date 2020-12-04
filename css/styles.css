@@ -47,9 +47,8 @@ body {
 
     #weekGrid {
         display: grid;
-        grid-template-columns: 0.4fr;
+        grid-template-columns: 25px;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        margin: auto;
         height: 250px;
         color: #313131;
         background-color: green;
@@ -57,8 +56,9 @@ body {
 
     #weekGrid > * {
         height: 0;
-        margin-top: 18px;
-
+        margin-top: 17px;
+        text-align: center;
+        width: 100%;
     }
 
     #monthGrid {
