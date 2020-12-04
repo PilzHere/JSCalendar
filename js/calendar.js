@@ -197,7 +197,7 @@ function displayRedWeekend()
 	for(day = 0; day < 32; day++)
 	{
 		var d = new Date(2020, 11, day);
-		if(d.getDay() == 0 || d.getDay() == 6)
+		if(d.getDay() == 1 || d.getDay() == 0)
 		{
 			try{
 				var buttonId = "btnDay" + day;
