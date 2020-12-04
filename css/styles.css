@@ -1,62 +1,85 @@
 html {
-	/*background-color: #222221;*/
-	background-color: #f5f5f0;
+    /*background-color: #222221;*/
+    background-color: #f5f5f0;
 }
 
 body {
-	/*font-family: "MyWebFont";*/
-	/*background-color: #f5f5f0;*/
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
+    /*font-family: "MyWebFont";*/
+    /*background-color: #f5f5f0;*/
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
 }
 
 #mainWrapper {
-	margin-left: 3%;
-	margin-right: 3%;
-	background-color: red;
+    margin-left: 3%;
+    margin-right: 3%;
+    background-color: red;
 }
 
 #currentDayWrapper {
-	background-color: #d0d0d0;
+    background-color: #d0d0d0;
 }
 
 #monthButtonsWrapper {
-	background-color: lightgreen;
-	text-align: center;
-	margin-top: 10px;
+    background-color: lightgreen;
+    text-align: center;
+    margin-top: 10px;
 }
 
 #selectedDateTextArea {
-	width: 98%;
-	height: 175px;
-	resize: none;
+    width: 98%;
+    height: 175px;
+    resize: none;
 }
 
 #daysLabel {
-	text-align: center;
-	background-color: seagreen;
+    text-align: center;
+    background-color: seagreen;
 }
 
 @media only screen and (max-width: 320px) {
-	#monthGrid {
-		/*background-color: burlywood;*/
-		display: grid;
-		grid-template-columns: 42px 42px 42px 42px 42px 42px 42px;
-		grid-gap: 1px;
-		height: 250px;
-	}
+    #weekAndMonthGrid {
+        display: grid;
+        grid-template-columns: 1fr 14fr;
+        height: 250px;
+    }
 
-	#monthWrapper {
-		background-color: darkgoldenrod;
-		/*width: 100%;*/
-	}
+    #weekGrid {
+        display: grid;
+        grid-template-columns: 0.4fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        margin: auto;
+        height: 250px;
+        color: #313131;
+        background-color: green;
+    }
 
-	#monthGrid > * {
-		background-color: cadetblue;
-		width: 100%;
-		height: 100%;
-	}
+    #weekGrid > * {
+        height: 0;
+        margin-top: 18px;
+
+    }
+
+    #monthGrid {
+        /*background-color: burlywood;*/
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 1px;
+        height: 250px;
+    }
+
+    #monthWrapper {
+        background-color: darkgoldenrod;
+        /*width: 100%;*/
+    }
+
+    #monthGrid > * {
+        background-color: cadetblue;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 @media only screen and (min-width: 321px) {
