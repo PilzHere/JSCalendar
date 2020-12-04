@@ -279,7 +279,6 @@ function getWeekNumber(d) {
     );
     // January 4th is always in week 1.
     let week1 = new Date(currentDate.getFullYear(), 0, 4);
-    console.log(week1);
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.,
     return (
         1 +
@@ -296,10 +295,10 @@ console.log(getWeekNumber(new Date())); // Testing week number for current date
 
 function displayWeekNumbers() {
     var weekNumbers = [];
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 32; i += 7) {
         weekNumbers[i] = document.createElement("h4");
         weekNumbers[i].className = "weekNumbers";
-        weekNumbers[i].textContent = getWeekNumber(new Date());
+        weekNumbers[i].textContent = getWeekNumber(new Date(currentYear, currentMonth - 1, i));
         document.getElementById("weekGrid").appendChild(weekNumbers[i]);
 
     }

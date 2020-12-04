@@ -42,7 +42,6 @@ body {
     #weekAndMonthGrid {
         display: grid;
         grid-template-columns: 1fr 14fr;
-        grid-gap: 1px;
         height: 250px;
     }
 
@@ -51,13 +50,15 @@ body {
         grid-template-columns: 0.4fr;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
         margin: auto;
-        grid-row-gap: 1px;
         height: 250px;
         color: #313131;
+        background-color: green;
     }
 
     #weekGrid > * {
         height: 0;
+        margin-top: 18px;
+
     }
 
     #monthGrid {
