@@ -53,6 +53,8 @@ registeredDays.forEach((day) => {
     );
 });
 
+console.log(registeredDays);
+
 function initWebsite() {
     const mainWrapper = document.createElement("div");
     mainWrapper.tagName = "mainWrapper";
@@ -308,3 +310,28 @@ function updateWeekNumbers() {
         date += oneWeek;
     }
 }
+
+function dayOfTheWeek(date) {
+    return new Date(date).toLocaleString("en-US", {
+        weekday: "long",
+    });
+}
+
+function displaySelectedDatePlan(pickedDate) {
+    let date = pickedDate.getDate();
+    let day = dayOfTheWeek(pickedDate);
+    let month = MONTHNAMES[pickedDate.getMonth()];
+    document.getElementById("selectedDateLabel").textContent =
+        day + " " + date + " " + month;
+
+// WORKING ON THIS
+/*         registeredDays.forEach(registeredDays => {
+            if (registeredDays.)
+        });
+    if (registeredDays[date] != null) {
+        document.getElementById("selectedDateTextArea").textContent =
+            registeredDays[date];
+    } */
+}
+
+displaySelectedDatePlan(new Date(2020, 11, 8)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day
