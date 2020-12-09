@@ -3,6 +3,7 @@
 const appName = "JSCalendar";
 
 const today = new Date(); // Time right now.
+let currentDay = today.getDay();
 let currentMonth = today.getMonth() + 1;
 let currentYear = today.getFullYear();
 
@@ -258,6 +259,8 @@ function displayRedWeekend()
 initWebsite();
 displayRedWeekend();
 displayWeekNumbers();
+currentDateAndNotes();
+
 /*
 function getCurrentTime() {
 	const fullDate = today.toISOString().slice(0, 10);
@@ -302,4 +305,17 @@ function displayWeekNumbers() {
         document.getElementById("weekGrid").appendChild(weekNumbers[i]);
 
     }
+}
+
+function currentDateDisplay (){
+    for (let i=0; i < registeredDays.length; i++ ){
+        if (currentDay === registeredDays[i].dayNumber && currentMonth === registeredDays[i].monthNumber 
+            && currentYear === registeredDays[i].yearNumber){
+                try{
+                    let buttonId = "btnDay" ;
+                    document.getElementById(buttonId).style.background = "yellow";
+                }catch(err){}
+            }
+    }
+    
 }
