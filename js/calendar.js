@@ -37,7 +37,7 @@ function Day(dayNumber, monthNumber, yearNumber, notes) {
 }
 
 let registeredDays = [];
-let newDay = new Day(20, 12, 2020, "This is a note."); // Test
+let newDay = new Day(20, 11, 2020, "This is a note."); // Test
 registeredDays.push(newDay);
 
 registeredDays.forEach((day) => {
@@ -311,27 +311,38 @@ function updateWeekNumbers() {
     }
 }
 
-function dayOfTheWeek(date) {
+function getDayOfTheWeek(date) {
     return new Date(date).toLocaleString("en-US", {
         weekday: "long",
     });
 }
 
-function displaySelectedDatePlan(pickedDate) {
+function displaySelectedDatePlan(pickedDate) { // (year, month, date)
     let date = pickedDate.getDate();
-    let day = dayOfTheWeek(pickedDate);
-    let month = MONTHNAMES[pickedDate.getMonth()];
-    document.getElementById("selectedDateLabel").textContent =
-        day + " " + date + " " + month;
+    let day = getDayOfTheWeek(pickedDate);
+    let monthName = MONTHNAMES[pickedDate.getMonth()];
+    let monthNumber = pickedDate.getMonth();
+    let year = pickedDate.getFullYear();
 
-// WORKING ON THIS
-/*         registeredDays.forEach(registeredDays => {
-            if (registeredDays.)
-        });
-    if (registeredDays[date] != null) {
-        document.getElementById("selectedDateTextArea").textContent =
-            registeredDays[date];
-    } */
+    document.getElementById("selectedDateLabel").textContent =
+        day + " " + date + " " + monthName;
+    getAndDisplayNotes();
+
+    function getAndDisplayNotes() {
+        for (let i = 0; i < registeredDays.length; i++) {
+            if (
+                registeredDays[i].dayNumber === date &&
+                registeredDays[i].monthNumber === monthNumber &&
+                registeredDays[i].yearNumber === year
+            ) {
+                if (registeredDays[i].notes != null)
+                    document.getElementById(
+                        "selectedDateTextArea"
+                    ).textContent = registeredDays[i].notes;
+                break;
+            }
+        }
+    }
 }
 
-displaySelectedDatePlan(new Date(2020, 11, 8)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day
+displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
