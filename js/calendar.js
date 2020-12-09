@@ -9,6 +9,8 @@ let currentYear = today.getFullYear();
 const monthCells = [7 * 5]; // Maximum amount of cells in the month-grid.
 let oldMonthAmountOfDays = 0;
 
+var globalBtnDay;
+
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHNAMES = [
 	"January",
@@ -274,6 +276,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 		btnDay.tagName = "btnDay" + currentDay;
 		btnDay.id = "btnDay" + currentDay;
 		btnDay.innerHTML = currentDay;
+		btnDay.addEventListener("click", getCurrentDay); // MIN KOD---------------------
 
 		currentMonthButtons.push(btnDay); // Add to array of buttons.
 
@@ -301,21 +304,65 @@ function getButtonOfMonth(dayNumber) {
 }
 
 function displayRedWeekend() {
+	// Gets the month and year from ID="selectedMonthLabel"
+	let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
+	let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
+	let selectedYear = monthYearSplit[1];
+	let selectedMonth = monthYearSplit[0];
+
+	// Updates the month and year everytime month changes
+	document.getElementById("btnNextMonth").addEventListener("click", displayRedWeekend);
+	document.getElementById("btnPreviousMonth").addEventListener("click", displayRedWeekend);
+
+	let monthNum = 0;
+	switch(selectedMonth){
+		case MONTHNAMES[0]:
+			monthNum = 0; // January
+			break;
+		case MONTHNAMES[1]:
+			monthNum = 1; // February
+			break;
+		case MONTHNAMES[2]:
+			monthNum = 2; // Mars etc....
+			break;
+		case MONTHNAMES[3]:
+			monthNum = 3;
+			break;
+		case MONTHNAMES[4]:
+			monthNum = 4;
+			break;
+		case MONTHNAMES[5]:
+			monthNum = 5;
+			break;
+		case MONTHNAMES[6]:
+			monthNum = 6; 
+			break;
+		case MONTHNAMES[7]:
+			monthNum = 7; 
+			break;
+		case MONTHNAMES[8]:
+			monthNum = 8;
+			break;
+		case MONTHNAMES[9]:
+			monthNum = 9;
+			break;
+		case MONTHNAMES[10]:
+			monthNum = 10;
+			break;
+		case MONTHNAMES[11]:
+			monthNum = 11;
+			break;
+	}
 	for (day = 0; day < 32; day++) {
-		var d = new Date(2020, 11, day);
-		if (d.getDay() == 1 || d.getDay() == 0) {
+		var d = new Date(selectedYear, monthNum, day);
+		if (d.getDay() == 6 || d.getDay() == 0) {
 			try {
 				var buttonId = "btnDay" + day;
 				document.getElementById(buttonId).style.background = "red";
 			} catch (err) {}
 		}
 	}
-
-	if (document.getElementById("btnNextMonth").click) {
-		setInterval(displayRedWeekend);
-	}
 }
-
 initWebsite();
 
 /*
@@ -376,3 +423,5 @@ function updateWeekNumbers() {
 		date += oneWeek;
 	}
 }
+
+
