@@ -10,6 +10,8 @@ let currentYear = today.getFullYear();
 const monthCells = [7 * 5]; // Maximum amount of cells in the month-grid.
 let oldMonthAmountOfDays = 0;
 
+var globalBtnDay;
+
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHNAMES = [
     "January",
@@ -322,21 +324,65 @@ function getButtonOfMonth(dayNumber) {
 }
 
 function displayRedWeekend() {
-    for (day = 0; day < 32; day++) {
-        var d = new Date(2020, 11, day);
-        if (d.getDay() == 1 || d.getDay() == 0) {
-            try {
-                var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.background = "red";
-            } catch (err) {}
-        }
-    }
+	// Gets the month and year from ID="selectedMonthLabel"
+	let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
+	let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
+	let selectedYear = monthYearSplit[1];
+	let selectedMonth = monthYearSplit[0];
 
-    if (document.getElementById("btnNextMonth").click) {
-        setInterval(displayRedWeekend);
-    }
+	// Updates the month and year everytime month changes
+	document.getElementById("btnNextMonth").addEventListener("click", displayRedWeekend);
+	document.getElementById("btnPreviousMonth").addEventListener("click", displayRedWeekend);
+
+	let monthNum = 0;
+	switch(selectedMonth){
+		case MONTHNAMES[0]:
+			monthNum = 0; // January
+			break;
+		case MONTHNAMES[1]:
+			monthNum = 1; // February
+			break;
+		case MONTHNAMES[2]:
+			monthNum = 2; // Mars etc....
+			break;
+		case MONTHNAMES[3]:
+			monthNum = 3;
+			break;
+		case MONTHNAMES[4]:
+			monthNum = 4;
+			break;
+		case MONTHNAMES[5]:
+			monthNum = 5;
+			break;
+		case MONTHNAMES[6]:
+			monthNum = 6; 
+			break;
+		case MONTHNAMES[7]:
+			monthNum = 7; 
+			break;
+		case MONTHNAMES[8]:
+			monthNum = 8;
+			break;
+		case MONTHNAMES[9]:
+			monthNum = 9;
+			break;
+		case MONTHNAMES[10]:
+			monthNum = 10;
+			break;
+		case MONTHNAMES[11]:
+			monthNum = 11;
+			break;
+	}
+	for (day = 0; day < 32; day++) {
+		var d = new Date(selectedYear, monthNum, day);
+		if (d.getDay() == 6 || d.getDay() == 0) {
+			try {
+				var buttonId = "btnDay" + day;
+				document.getElementById(buttonId).style.background = "red";
+			} catch (err) {}
+		}
+	}
 }
-
 initWebsite();
 
 /*
@@ -434,7 +480,7 @@ function displaySelectedDatePlan(pickedDate) {
 }
 displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 
-function currentDateDisplay() {
-    var buttonId = "btnDay" + currentDate;
+function currentDateDisplay (){
+	var buttonId = "btnDay" + currentDate;
     document.getElementById(buttonId).style.background = "yellow";
 }
