@@ -9,13 +9,16 @@ body {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
+    padding-top: 2%;
+    background-color: rgb(5, 90, 90);
+    height: 100vh;
 }
 
 #mainWrapper {
-    margin-top: 2%;
+
     margin-left: 3%;
     margin-right: 3%;
-    background-color: rgb(133, 133, 133);
+    background-color: rgba(165, 165, 165, 0.514);
     border-radius: 10px;
     padding: 7px;
 }
@@ -49,12 +52,14 @@ body {
 
 @media only screen and (max-width: 320px) {
     #weekGrid {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
         height: 250px;
         color: #313131;
         background-color: transparent;
         width: 25px;
+        border: 1px solid #1f2f478f;
+        
     }
 
     #weekGrid > * {
@@ -70,12 +75,11 @@ body {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 1px;
         height: 250px;
+        border: 1px solid #1f2f478f;
     }
 
     #monthWrapper {
-        background-color: darkgoldenrod;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -91,6 +95,9 @@ body {
     #daysLabel {
         font-weight: 600;
         background-color: transparent;
+        padding-top: 6px;
+        display: grid;
+        grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 
     #currentMonthLabelAndButtons {
@@ -98,26 +105,26 @@ body {
         justify-content: space-between;
         align-items: center;
         color: #ffffff;
-        height: 50px;
+        height: 45px;
         font-size: 16pt;
         font-weight: 600;
         background-color: rgb(145, 144, 144);
     }
 
     #divDaysLabel {
-        height: 20px;
-        text-align: center;
-        padding: auto;
+        height: 25px;
+        border: 1px solid #1f2f478f;
     }
 
+    
+
     .btnDay {
-        box-shadow: inset 0px 0px 15px 3px #23395e;
-        background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);
-        background-color: #2e466e;
-        border: 1px solid #1f2f47;
+        box-shadow:inset 0px 0px 15px 3px #23395e;
+        background-color: transparent;
+        border: 1px solid #1f2f478f;
         display: inline-block;
         cursor: pointer;
-        color: #ffffff;
+        color: black;
         font-family: Arial;
         font-size: 15px;
         padding: 4px 7px;
