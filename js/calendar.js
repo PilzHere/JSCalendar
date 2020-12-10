@@ -353,6 +353,7 @@ function featureCalendarDisplay() {
  * @param {*} amountOfDaysInMonth
  */
 function updateMonthGrid(amountOfDaysInMonth) {
+<<<<<<< HEAD
     if (document.getElementById("monthGrid").hasChildNodes) {
         for (
             let currentDay = 1;
@@ -400,6 +401,55 @@ function updateMonthGrid(amountOfDaysInMonth) {
     }
 
     oldMonthAmountOfDays = amountOfDaysInMonth;
+=======
+	if (document.getElementById("monthGrid").hasChildNodes) {
+		for (
+			let currentDay = 1;
+			currentDay < oldMonthAmountOfDays + 1;
+			currentDay++
+		) {
+			if (document.getElementById("btnDay" + currentDay) != null) {
+				document.getElementById("btnDay" + currentDay).remove();
+
+				//console.log("previous buttons: " + currentMonthButtons.length); // test
+				currentMonthButtons.length = 0; // Clear the array.
+				currentMonthButtons.length = maximumAmountOfButtons;
+			}
+		}
+	}
+
+	// Maybe no needed...
+	if (
+		amountOfDaysInMonth < 28
+			? (amountOfDaysInMonth = 28)
+			: amountOfDaysInMonth
+	);
+	if (
+		amountOfDaysInMonth > 31
+			? (amountOfDaysInMonth = 31)
+			: amountOfDaysInMonth
+	);
+	// Maybe end.
+
+	for (
+		let currentDay = 1;
+		currentDay < amountOfDaysInMonth + 1;
+		currentDay++
+	) {
+		const btnDay = document.createElement("button");
+		btnDay.tagName = "btnDay" + currentDay;
+		btnDay.id = "btnDay" + currentDay;
+		btnDay.innerHTML = currentDay;
+
+		currentMonthButtons.push(btnDay); // Add to array of buttons.
+
+		document.getElementById("monthGrid").appendChild(btnDay);
+		//monthCells[currentDay - 1] = btnDay;
+	}
+
+	oldMonthAmountOfDays = amountOfDaysInMonth;
+	currentDateDisplay();
+>>>>>>> display-current-date-and-notes
 }
 
 /**
@@ -567,8 +617,19 @@ function displaySelectedDatePlan(pickedDate) {
 }
 
 function currentDateDisplay() {
+<<<<<<< HEAD
     var buttonId = "btnDay" + currentDate;
     document.getElementById(buttonId).style.background = "green";
+=======
+	let nowDay = new Date(); 
+    let nowDate = nowDay.getDate();
+    let nowMonth = nowDay.getMonth() + 1;
+	let nowYear = nowDay.getFullYear();
+	if (currentDate === nowDate && currentMonth === nowMonth && currentYear === nowYear){
+		var buttonId = "btnDay" + nowDate;
+		document.getElementById(buttonId).style.background = "yellow";
+	}
+>>>>>>> display-current-date-and-notes
 }
 
 initWebsite();
