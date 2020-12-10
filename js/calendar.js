@@ -380,6 +380,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 	}
 
 	oldMonthAmountOfDays = amountOfDaysInMonth;
+	currentDateDisplay();
 }
 
 /**
@@ -547,8 +548,14 @@ function displaySelectedDatePlan(pickedDate) {
 }
 
 function currentDateDisplay() {
-	var buttonId = "btnDay" + currentDate;
-	document.getElementById(buttonId).style.background = "yellow";
+	let nowDay = new Date(); 
+    let nowDate = nowDay.getDate();
+    let nowMonth = nowDay.getMonth() + 1;
+	let nowYear = nowDay.getFullYear();
+	if (currentDate === nowDate && currentMonth === nowMonth && currentYear === nowYear){
+		var buttonId = "btnDay" + nowDate;
+		document.getElementById(buttonId).style.background = "yellow";
+	}
 }
 
 initWebsite();
