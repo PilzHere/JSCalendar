@@ -3,6 +3,7 @@
 const appName = "JSCalendar";
 
 const today = new Date(); // Time right now.
+let currentDate = today.getDate();
 let currentMonth = today.getMonth() + 1;
 let currentYear = today.getFullYear();
 
@@ -177,6 +178,7 @@ function initWebsite() {
 
 	console.log("this month: " + currentMonth); // test
 
+	currentDateDisplay ();
 	displayRedWeekend();
 	displayWeekNumbers();
 }
@@ -412,3 +414,8 @@ function displaySelectedDatePlan(pickedDate) { // (year, month, date)
 }
 
 displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
+
+function currentDateDisplay (){
+	var buttonId = "btnDay" + currentDate;
+    document.getElementById(buttonId).style.background = "yellow";          
+}
