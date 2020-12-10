@@ -7,12 +7,13 @@ let currentDate = today.getDate();
 let currentMonth = today.getMonth() + 1;
 let currentYear = today.getFullYear();
 
-const monthCells = [7 * 5]; // Maximum amount of cells in the month-grid.
+const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-grid.
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
 
-const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+// Sunday is twice for getting day-names correctly...
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHNAMES = [
 	"January",
 	"February",
@@ -47,7 +48,7 @@ function Day(dayNumber, monthNumber, yearNumber, notes) {
 }
 
 // Buttons displaying the current month.
-let currentMonthButtons = [];
+let currentMonthButtons = [maximumAmountOfButtons];
 
 // Dates the user have registered.
 let registeredDays = [];
@@ -180,6 +181,11 @@ function initWebsite() {
 
 	console.log("this month: " + currentMonth); // test
 
+	// Temp: To show disabled buttons in init.
+	nextMonthEvent();
+	previousMonthEvent();
+	// Temp end.
+
 	currentDateDisplay();
 	displayRedWeekend();
 	displayWeekNumbers();
@@ -210,11 +216,23 @@ function previousMonthEvent() {
 	today.setMonth(currentMonth);
 	today.setFullYear(currentYear);
 
+	removeDisabledButtons();
+	featureCalendarDisplay();
+
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
-	console.log("this month: " + currentMonth);
+	//console.log("this month: " + currentMonth);
+
+	debugLogCurrentViewedMonthInfo();
+}
+
+/**
+ * Prints month and year in view.
+ */
+function debugLogCurrentViewedMonthInfo() {
+	console.log("Current view month: ", currentMonth, " year: ", currentYear);
 }
 
 /**
@@ -231,11 +249,84 @@ function nextMonthEvent() {
 	today.setMonth(currentMonth);
 	today.setFullYear(currentYear);
 
+	removeDisabledButtons();
+	featureCalendarDisplay();
+
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
 	//console.log("this month: " + currentMonth); // test
+
+	debugLogCurrentViewedMonthInfo();
+}
+
+/**
+ * Adds disabled buttons.
+ */
+function addDisabledButtonToMonthGrid() {
+	const btnDay = document.createElement("button");
+	btnDay.tagName = "btnDayNone";
+	btnDay.id = "btnDayNone";
+	btnDay.innerHTML = "";
+	btnDay.disabled = true;
+
+	currentMonthButtons.unshift(btnDay);
+
+	document.getElementById("monthGrid").appendChild(btnDay);
+}
+
+/**
+ * Removes disabled buttons.
+ */
+function removeDisabledButtons() {
+	for (let i = 0; i < 7; i++) {
+		if (document.getElementById("btnDayNone") != null) {
+			document.getElementById("btnDayNone").remove();
+		}
+	}
+}
+
+/**
+ * Displays the buttons like a real calendar.
+ */
+function featureCalendarDisplay() {
+	let firstDay = new Date(currentYear, currentMonth - 1, 1);
+	let firstDayName = WEEKDAYS[firstDay.getDay()];
+	//console.log("First day of month: ", firstDayName);
+
+	switch (firstDayName) {
+		case "Sun":
+			for (i = WEEKDAYS.indexOf("Sat"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Sat":
+			for (i = WEEKDAYS.indexOf("Fri"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Fri":
+			for (i = WEEKDAYS.indexOf("Thu"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Thu":
+			for (i = WEEKDAYS.indexOf("Wed"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Wed":
+			for (i = WEEKDAYS.indexOf("Tue"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Tue":
+			for (i = WEEKDAYS.indexOf("Mon"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+	}
 }
 
 /**
@@ -254,10 +345,12 @@ function updateMonthGrid(amountOfDaysInMonth) {
 
 				//console.log("previous buttons: " + currentMonthButtons.length); // test
 				currentMonthButtons.length = 0; // Clear the array.
+				currentMonthButtons.length = maximumAmountOfButtons;
 			}
 		}
 	}
 
+	// Maybe no needed...
 	if (
 		amountOfDaysInMonth < 28
 			? (amountOfDaysInMonth = 28)
@@ -268,6 +361,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 			? (amountOfDaysInMonth = 31)
 			: amountOfDaysInMonth
 	);
+	// Maybe end.
 
 	for (
 		let currentDay = 1;
@@ -368,18 +462,6 @@ function displayRedWeekend() {
 		}
 	}
 }
-initWebsite();
-
-/*
-function getCurrentTime() {
-	const fullDate = today.toISOString().slice(0, 10);
-
-	document.getElementById("selectedMonth").innerHTML =
-		monthNames[today.getMonth()] + " " + today.getFullYear();
-}
-*/
-
-//getCurrentTime();
 
 // Returning week number of the date you send to the function
 function getWeekNumber(d) {
@@ -464,9 +546,10 @@ function displaySelectedDatePlan(pickedDate) {
 	}
 }
 
-displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
-
 function currentDateDisplay() {
 	var buttonId = "btnDay" + currentDate;
 	document.getElementById(buttonId).style.background = "yellow";
 }
+
+initWebsite();
+displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
