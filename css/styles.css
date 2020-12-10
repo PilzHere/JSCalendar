@@ -16,6 +16,7 @@ body {
     padding-top: 2%;
     background-color: rgb(5, 90, 90);
     height: 100vh;
+    text-shadow: 0px 2px 0px #000000;
 }
 
 #mainWrapper {
@@ -122,6 +123,7 @@ body {
         font-size: 16pt;
         font-weight: 600;
         background-color: cadetblue;
+        text-shadow: 0px 2px 0px #000000;
     }
 
     #divDaysLabel {
@@ -145,7 +147,7 @@ body {
         font-family: Arial;
         font-size: 15px;
         text-decoration: none;
-        text-shadow: 0px 1px 0px #263666;
+        text-shadow: 0px 2px 0px #000000;
     }
 
     #btnNextMonth,
@@ -161,7 +163,7 @@ body {
         font-weight: bold;
         padding: 5px 20px;
         text-decoration: none;
-        text-shadow: 0px 1px 0px #2f6627;
+        text-shadow: 0px 2px 0px #000000;
     }
 
 }
