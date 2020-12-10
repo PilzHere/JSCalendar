@@ -1,6 +1,9 @@
 html {
     /*background-color: #222221;*/
     background-color: #f5f5f0;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(5, 90, 90);
 }
 
 body {
@@ -9,6 +12,7 @@ body {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
+    color: rgb(182, 182, 182);
     padding-top: 2%;
     background-color: rgb(5, 90, 90);
     height: 100vh;
@@ -24,7 +28,7 @@ body {
 }
 
 #currentDayWrapper {
-    background-color: #d0d0d0;
+    background-color: cadetblue;
 }
 
 #monthButtonsWrapper {
@@ -34,13 +38,14 @@ body {
 
 #selectedDateTextArea {
     width: 98%;
-    height: 175px;
+    height: 170px;
     resize: none;
 }
 
 #daysLabel {
     text-align: center;
     background-color: seagreen;
+    color: rgb(209, 209, 209);
 }
 
 #weekAndMonthGrid {
@@ -51,11 +56,17 @@ body {
 }
 
 @media only screen and (max-width: 320px) {
+
+    #selectedDateLabel {
+        color: white;
+        font-size: 14pt;
+        padding-left: 5px;
+    }
+
     #weekGrid {
         display: grid;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
         height: 250px;
-        color: #313131;
         background-color: transparent;
         width: 25px;
         border: 1px solid #1f2f478f;
@@ -67,7 +78,7 @@ body {
         justify-content: center;
         align-items: center;
         height: 7px;
-        color: rgb(51, 51, 51);
+        color:rgb(209, 209, 209);
     }
 
     #monthGrid {
@@ -92,6 +103,8 @@ body {
         height: 100%;
     }
 
+
+
     #daysLabel {
         font-weight: 600;
         background-color: transparent;
@@ -104,11 +117,11 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #ffffff;
+        color: rgb(255, 255, 255);
         height: 45px;
         font-size: 16pt;
         font-weight: 600;
-        background-color: rgb(145, 144, 144);
+        background-color: cadetblue;
     }
 
     #divDaysLabel {
@@ -117,17 +130,20 @@ body {
     }
 
     
+    button:disabled{
+        background-color: transparent;
+        border: 1px solid #1f2f478f;
+    }
+    
 
     .btnDay {
-        box-shadow:inset 0px 0px 15px 3px #23395e;
         background-color: transparent;
         border: 1px solid #1f2f478f;
         display: inline-block;
         cursor: pointer;
-        color: black;
+        color: white;
         font-family: Arial;
         font-size: 15px;
-        padding: 4px 7px;
         text-decoration: none;
         text-shadow: 0px 1px 0px #263666;
     }
@@ -139,7 +155,7 @@ body {
         border-radius: 28px;
         display: inline-block;
         cursor: pointer;
-        color: #ffffff;
+        color: rgb(255, 255, 255);
         font-family: Arial;
         font-size: 24px;
         font-weight: bold;
@@ -147,6 +163,7 @@ body {
         text-decoration: none;
         text-shadow: 0px 1px 0px #2f6627;
     }
+
 }
 
 @media only screen and (min-width: 321px) {
