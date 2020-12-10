@@ -12,9 +12,12 @@ body {
 }
 
 #mainWrapper {
+    margin-top: 2%;
     margin-left: 3%;
     margin-right: 3%;
-    background-color: red;
+    background-color: rgb(133, 133, 133);
+    border-radius: 10px;
+    padding: 7px;
 }
 
 #currentDayWrapper {
@@ -24,7 +27,6 @@ body {
 #monthButtonsWrapper {
     background-color: lightgreen;
     text-align: center;
-    margin-top: 10px;
 }
 
 #selectedDateTextArea {
@@ -38,27 +40,29 @@ body {
     background-color: seagreen;
 }
 
-@media only screen and (max-width: 320px) {
-    #weekAndMonthGrid {
-        display: grid;
-        grid-template-columns: 1fr 14fr;
-        height: 250px;
-    }
+#weekAndMonthGrid {
+    display: grid;
+    grid-template-columns: 1fr 14fr;
+    height: 250px;
+    margin-bottom: 2px;
+}
 
+@media only screen and (max-width: 320px) {
     #weekGrid {
-        display: grid;
-        grid-template-columns: 25px;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         height: 250px;
         color: #313131;
-        background-color: green;
+        background-color: transparent;
+        width: 25px;
     }
 
     #weekGrid > * {
-        height: 0;
-        margin-top: 17px;
-        text-align: center;
-        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 7px;
+        color: rgb(51, 51, 51);
     }
 
     #monthGrid {
@@ -72,6 +76,9 @@ body {
 
     #monthWrapper {
         background-color: darkgoldenrod;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         /*width: 100%;*/
     }
 
@@ -79,6 +86,59 @@ body {
         background-color: cadetblue;
         width: 100%;
         height: 100%;
+    }
+
+    #daysLabel {
+        font-weight: 600;
+        background-color: transparent;
+    }
+
+    #currentMonthLabelAndButtons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #ffffff;
+        height: 50px;
+        font-size: 16pt;
+        font-weight: 600;
+        background-color: rgb(145, 144, 144);
+    }
+
+    #divDaysLabel {
+        height: 20px;
+        text-align: center;
+        padding: auto;
+    }
+
+    .btnDay {
+        box-shadow: inset 0px 0px 15px 3px #23395e;
+        background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+        background-color: #2e466e;
+        border: 1px solid #1f2f47;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 15px;
+        padding: 4px 7px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #263666;
+    }
+
+    #btnNextMonth,
+    #btnPreviousMonth {
+        background-color: transparent;
+        border: transparent;
+        border-radius: 28px;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5px 20px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #2f6627;
     }
 }
 
