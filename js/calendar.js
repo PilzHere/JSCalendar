@@ -477,7 +477,7 @@ function displayRedWeekend() {
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.background = "red";
+                document.getElementById(buttonId).style.background = "rgb(158, 0, 0)";
             } catch (err) {}
         }
     }
