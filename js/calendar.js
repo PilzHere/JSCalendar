@@ -180,7 +180,7 @@ function initWebsite() {
 
 	console.log("this month: " + currentMonth); // test
 
-	currentDateDisplay ();
+	currentDateDisplay();
 	displayRedWeekend();
 	displayWeekNumbers();
 }
@@ -278,7 +278,6 @@ function updateMonthGrid(amountOfDaysInMonth) {
 		btnDay.tagName = "btnDay" + currentDay;
 		btnDay.id = "btnDay" + currentDay;
 		btnDay.innerHTML = currentDay;
-		btnDay.addEventListener("click", getCurrentDay); // MIN KOD---------------------
 
 		currentMonthButtons.push(btnDay); // Add to array of buttons.
 
@@ -313,11 +312,15 @@ function displayRedWeekend() {
 	let selectedMonth = monthYearSplit[0];
 
 	// Updates the month and year everytime month changes
-	document.getElementById("btnNextMonth").addEventListener("click", displayRedWeekend);
-	document.getElementById("btnPreviousMonth").addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnNextMonth")
+		.addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnPreviousMonth")
+		.addEventListener("click", displayRedWeekend);
 
 	let monthNum = 0;
-	switch(selectedMonth){
+	switch (selectedMonth) {
 		case MONTHNAMES[0]:
 			monthNum = 0; // January
 			break;
@@ -337,10 +340,10 @@ function displayRedWeekend() {
 			monthNum = 5;
 			break;
 		case MONTHNAMES[6]:
-			monthNum = 6; 
+			monthNum = 6;
 			break;
 		case MONTHNAMES[7]:
-			monthNum = 7; 
+			monthNum = 7;
 			break;
 		case MONTHNAMES[8]:
 			monthNum = 8;
@@ -427,42 +430,43 @@ function updateWeekNumbers() {
 }
 
 function getDayOfTheWeek(date) {
-    return new Date(date).toLocaleString("en-US", {
-        weekday: "long",
-    });
+	return new Date(date).toLocaleString("en-US", {
+		weekday: "long",
+	});
 }
 
-function displaySelectedDatePlan(pickedDate) { // (year, month, date)
-    let date = pickedDate.getDate();
-    let day = getDayOfTheWeek(pickedDate);
-    let monthName = MONTHNAMES[pickedDate.getMonth()];
-    let monthNumber = pickedDate.getMonth();
-    let year = pickedDate.getFullYear();
+function displaySelectedDatePlan(pickedDate) {
+	// (year, month, date)
+	let date = pickedDate.getDate();
+	let day = getDayOfTheWeek(pickedDate);
+	let monthName = MONTHNAMES[pickedDate.getMonth()];
+	let monthNumber = pickedDate.getMonth();
+	let year = pickedDate.getFullYear();
 
-    document.getElementById("selectedDateLabel").textContent =
-        day + " " + date + " " + monthName;
-    getAndDisplayNotes();
+	document.getElementById("selectedDateLabel").textContent =
+		day + " " + date + " " + monthName;
+	getAndDisplayNotes();
 
-    function getAndDisplayNotes() {
-        for (let i = 0; i < registeredDays.length; i++) {
-            if (
-                registeredDays[i].dayNumber === date &&
-                registeredDays[i].monthNumber === monthNumber &&
-                registeredDays[i].yearNumber === year
-            ) {
-                if (registeredDays[i].notes != null)
-                    document.getElementById(
-                        "selectedDateTextArea"
-                    ).textContent = registeredDays[i].notes;
-                break;
-            }
-        }
-    }
+	function getAndDisplayNotes() {
+		for (let i = 0; i < registeredDays.length; i++) {
+			if (
+				registeredDays[i].dayNumber === date &&
+				registeredDays[i].monthNumber === monthNumber &&
+				registeredDays[i].yearNumber === year
+			) {
+				if (registeredDays[i].notes != null)
+					document.getElementById(
+						"selectedDateTextArea"
+					).textContent = registeredDays[i].notes;
+				break;
+			}
+		}
+	}
 }
 
 displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 
-function currentDateDisplay (){
+function currentDateDisplay() {
 	var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.background = "yellow";          
+	document.getElementById(buttonId).style.background = "yellow";
 }
