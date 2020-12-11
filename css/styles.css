@@ -66,7 +66,7 @@ body {
 
     #weekGrid {
         display: grid;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         height: 250px;
         background-color: transparent;
         width: 25px;
@@ -78,7 +78,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 7px;
+        height: 0px;
         color:rgb(209, 209, 209);
     }
 
@@ -86,7 +86,7 @@ body {
         /*background-color: burlywood;*/
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
         height: 250px;
         border: 1px solid #1f2f478f;
     }
