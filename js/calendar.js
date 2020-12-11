@@ -509,7 +509,7 @@ function getWeekNumber(d) {
 function displayWeekNumbers() {
     var weekNumbers = [];
     var week = 1;
-    for (i = 1; i < 32; i += 7) {
+    for (i = 1; i < 37; i += 7) {
         weekNumbers[i] = document.createElement("h4");
         weekNumbers[i].className = "weekNumbers";
         weekNumbers[i].id = "week" + week++;
@@ -523,7 +523,7 @@ function displayWeekNumbers() {
 function updateWeekNumbers() {
     let date = 1;
     let oneWeek = 7;
-    for (i = 1; i <= 5; i++) {
+    for (i = 1; i <= 6; i++) {
         document.getElementById("week" + i).textContent = getWeekNumber(
             new Date(currentYear, currentMonth - 1, date)
         );
