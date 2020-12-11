@@ -51,7 +51,7 @@ let currentMonthButtons = [];
 
 // Dates the user have registered.
 let registeredDays = [];
-let newDay = new Day(20, 11, 2020, "This is a note."); // Test
+let newDay = new Day(20, 11, 2020, ""); // REMOVED BY ROBERT - USED IN SAVENOTE
 registeredDays.push(newDay);
 
 registeredDays.forEach((day) => {
@@ -278,7 +278,6 @@ function updateMonthGrid(amountOfDaysInMonth) {
 		btnDay.tagName = "btnDay" + currentDay;
 		btnDay.id = "btnDay" + currentDay;
 		btnDay.innerHTML = currentDay;
-		btnDay.addEventListener("click", getCurrentDay); // MIN KOD---------------------
 
 		currentMonthButtons.push(btnDay); // Add to array of buttons.
 
@@ -466,3 +465,43 @@ function currentDateDisplay (){
 	var buttonId = "btnDay" + currentDate;
     document.getElementById(buttonId).style.background = "yellow";          
 }
+
+function addButtonToNote()
+{
+	var button = document.createElement("button");
+	button.innerHTML = "ADD";
+	var deleteButton = document.createElement("button");
+	button.innerHTML = "Delete";
+
+	var div = document.getElementById("mainWrapper");
+	div.appendChild(button);
+	div.appendChild(deleteButton);
+	console.log(div);
+}
+addButtonToNote();
+function saveNote()
+{
+	
+	let buttonList = {};
+	for(let button = 1; button < 32; button++)
+	{
+		try{
+			let dayButton = document.getElementById("btnDay" + button);
+			buttonList["btnDay" + button] = "";
+			dayButton.addEventListener("click", function(){
+				let noteText = document.getElementById("selectedDateTextArea").value;
+				buttonList["btnDay" + button] = noteText;
+				dayButton.textContent = dayButton.textContent + "!";
+				console.log(buttonList);
+			});
+
+		}catch(err){
+			
+		}
+		
+	}
+	
+	console.log(buttonList);	
+}
+saveNote()
+
