@@ -481,6 +481,7 @@ function displayRedWeekend() {
             } catch (err) {}
         }
     }
+  currentDateDisplay();
 }
 
 // Returning week number of the date you send to the function
