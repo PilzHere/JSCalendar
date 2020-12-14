@@ -1,12 +1,9 @@
 html {
-    /*background-color: #222221;*/
     margin: 0;
     padding: 0;
 }
 
 body {
-    /*font-family: "MyWebFont";*/
-    /*background-color: #f5f5f0;*/
     margin: 0;
     padding: 0;
     color: #222831;
@@ -27,6 +24,7 @@ body {
     width: 94%;
     min-height: 150px;
     resize: none;
+    background-color: #e8e8e8;
 }
 
 #daysLabel {
