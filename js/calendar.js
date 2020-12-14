@@ -477,7 +477,7 @@ function displayRedWeekend() {
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.color = "#f05454"; // Dark red color
+                document.getElementById(buttonId).style.color = "#f05454";
             } catch (err) {}
         }
     }
@@ -569,7 +569,7 @@ function displaySelectedDatePlan(pickedDate) {
 
 function currentDateDisplay() {
     var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.color = "green";
+    document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
 }
 
 initWebsite();
