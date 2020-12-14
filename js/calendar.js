@@ -77,7 +77,7 @@ function initWebsite() {
     const mainWrapper = document.createElement("div");
     mainWrapper.tagName = "mainWrapper";
     mainWrapper.id = "mainWrapper";
-    mainWrapper.innerHTML = appName;
+    mainWrapper.innerHTML = "<span id='appName'>" + appName + "<span>";
     document.body.appendChild(mainWrapper);
 
     // currentDayWrapper element
@@ -477,11 +477,11 @@ function displayRedWeekend() {
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.background = "rgb(158, 0, 0)";
+                document.getElementById(buttonId).style.color = "#f05454"; // Dark red color
             } catch (err) {}
         }
     }
-  currentDateDisplay();
+    currentDateDisplay();
 }
 
 // Returning week number of the date you send to the function
@@ -569,7 +569,7 @@ function displaySelectedDatePlan(pickedDate) {
 
 function currentDateDisplay() {
     var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.background = "green";
+    document.getElementById(buttonId).style.color = "green";
 }
 
 initWebsite();
