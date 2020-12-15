@@ -592,9 +592,9 @@ function displaySelectedDatePlan(pickedDate) {
     }
 }
 
-    /**
-     * Function highlights todays date with green color
-     */
+/**
+ * Function highlights todays date with green color
+ */
 function currentDateDisplay() {
     let todaysDate = new Date();
     if (
