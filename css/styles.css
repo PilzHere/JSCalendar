@@ -46,7 +46,7 @@ body {
     #selectedDateLabel {
         color: #e8e8e8;
         font-size: 14pt;
-        padding-left: 5px;
+        margin-left: 2%;
     }
 
     #appName {
