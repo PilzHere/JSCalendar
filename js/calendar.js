@@ -97,7 +97,7 @@ function initWebsite() {
     const selectedDateTextArea = document.createElement("textarea");
     selectedDateTextArea.tagName = "selectedDateTextArea";
     selectedDateTextArea.id = "selectedDateTextArea";
-    selectedDateTextArea.rows = 7;
+    selectedDateTextArea.rows = 15;
     selectedDateTextArea.cols = 50;
     selectedDateTextArea.placeholder =
         "Display notes for the selected date here...";
