@@ -77,7 +77,7 @@ function initWebsite() {
     const mainWrapper = document.createElement("div");
     mainWrapper.tagName = "mainWrapper";
     mainWrapper.id = "mainWrapper";
-    mainWrapper.innerHTML = appName;
+    mainWrapper.innerHTML = "<span id='appName'>" + appName + "<span>";
     document.body.appendChild(mainWrapper);
 
     // currentDayWrapper element
@@ -97,7 +97,7 @@ function initWebsite() {
     const selectedDateTextArea = document.createElement("textarea");
     selectedDateTextArea.tagName = "selectedDateTextArea";
     selectedDateTextArea.id = "selectedDateTextArea";
-    selectedDateTextArea.rows = 7;
+    selectedDateTextArea.rows = 15;
     selectedDateTextArea.cols = 50;
     selectedDateTextArea.placeholder =
         "Display notes for the selected date here...";
@@ -477,16 +477,20 @@ function displayRedWeekend() {
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.background = "rgb(158, 0, 0)";
+                document.getElementById(buttonId).style.color = "#f05454";
             } catch (err) {}
         }
     }
-  currentDateDisplay();
+    currentDateDisplay();
 }
 
-// Returning week number of the date you send to the function
+/**
+ * Returning week number of the date you send to the function
+ * Receives Date object as parameter
+ */
 function getWeekNumber(d) {
     const dayInMilliseconds = 86400000; // 60 sec * 60 min * 24 hours * 1000 to get a day in ms.
+    //Creates a new date object, to not disturb the original object.
     let currentDate = new Date(d);
     currentDate.setHours(0, 0, 0, 0);
     // Thursday in current week decides the year.
@@ -507,10 +511,14 @@ function getWeekNumber(d) {
     );
 }
 
+/**
+ * Function displays week numbers for the month on calendar.
+ */
 function displayWeekNumbers() {
-    var weekNumbers = [];
-    var week = 1;
-    for (i = 1; i < 37; i += 7) {
+    let weekNumbers = [];
+    let week = 1;
+    let dateBoxes = 42;
+    for (i = 1; i < dateBoxes; i += 7) {
         weekNumbers[i] = document.createElement("h4");
         weekNumbers[i].className = "weekNumbers";
         weekNumbers[i].id = "week" + week++;
@@ -521,6 +529,9 @@ function displayWeekNumbers() {
     }
 }
 
+/**
+ * Function updates the week numbers.
+ */
 function updateWeekNumbers() {
     let date = 1;
     let oneWeek = 7;
@@ -532,14 +543,21 @@ function updateWeekNumbers() {
     }
 }
 
+/**
+ * Function get the day of the week for a specific date.
+ * Takes an Date object as parameter
+ */
 function getDayOfTheWeek(date) {
     return new Date(date).toLocaleString("en-US", {
         weekday: "long",
     });
 }
 
+/**
+ * Function takes an Date object as parameter and then shows it on the webpage.
+ * Check if there is notes for that date, shows them if not null.
+ */
 function displaySelectedDatePlan(pickedDate) {
-    // (year, month, date)
     let date = pickedDate.getDate();
     let day = getDayOfTheWeek(pickedDate);
     let monthName = MONTHNAMES[pickedDate.getMonth()];
@@ -548,15 +566,22 @@ function displaySelectedDatePlan(pickedDate) {
 
     document.getElementById("selectedDateLabel").textContent =
         day + " " + date + " " + monthName;
-    getAndDisplayNotes();
+    getAndDisplayNotes(date, monthNumber, year);
 
-    function getAndDisplayNotes() {
+    /**
+     * Function search for correct object in an array that contain the selected dates year/month/date,
+     * check if there is any notes saved in the object and if so then shows them to the display.
+     * Takes an Date, monthnumber and year as parameter
+     */
+    function getAndDisplayNotes(date, monthNumber, year) {
         for (let i = 0; i < registeredDays.length; i++) {
+            //If the object contains the selected year/month/date
             if (
                 registeredDays[i].dayNumber === date &&
                 registeredDays[i].monthNumber === monthNumber &&
                 registeredDays[i].yearNumber === year
             ) {
+                //Check if object has notes and then shows them
                 if (registeredDays[i].notes != null)
                     document.getElementById(
                         "selectedDateTextArea"
@@ -569,7 +594,7 @@ function displaySelectedDatePlan(pickedDate) {
 
 function currentDateDisplay() {
     var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.background = "green";
+    document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
 }
 
 initWebsite();
