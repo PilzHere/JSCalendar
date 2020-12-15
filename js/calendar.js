@@ -592,9 +592,18 @@ function displaySelectedDatePlan(pickedDate) {
     }
 }
 
+/**
+ * Function highlights todays date with green color
+ */
 function currentDateDisplay() {
-    var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
+    let todaysDate = new Date();
+    if (
+        currentMonth - 1 == todaysDate.getMonth() &&
+        currentYear == todaysDate.getFullYear()
+    ) {
+        var buttonId = "btnDay" + currentDate;
+        document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
+    }
 }
 
 initWebsite();

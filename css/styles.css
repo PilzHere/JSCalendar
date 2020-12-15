@@ -148,14 +148,13 @@ button:disabled {
     text-decoration: none;
 }
 
-
 @media only screen and (max-width: 414px) {
     #mainWrapper {
         margin: 0;
         border-radius: 0;
         box-shadow: none;
     }
-    #selectedDateTextArea{
+    #selectedDateTextArea {
         height: 150px;
     }
     #daysLabel {
@@ -167,7 +166,7 @@ button:disabled {
     }
 
     #btnNextMonth,
-#btnPreviousMonth {
-    font-size: 16pt;
-}
+    #btnPreviousMonth {
+        font-size: 16pt;
+    }
 }
