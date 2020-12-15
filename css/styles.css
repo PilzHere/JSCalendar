@@ -9,6 +9,8 @@ body {
     color: #222831;
     background-color: rgba(0, 0, 0, 0.699);
     height: 100vh;
+    font-family: Consolas;
+    
 }
 
 #mainWrapper {
@@ -40,7 +42,7 @@ body {
     margin-bottom: 2px;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
     #selectedDateLabel {
         color: #e8e8e8;
         font-size: 14pt;
@@ -71,7 +73,8 @@ body {
         justify-content: center;
         align-items: center;
         height: 0px;
-        color: #222831;
+        font-weight: 600;
+        color: #222831b0;
     }
 
     #monthGrid {
@@ -112,7 +115,7 @@ body {
 
     button:disabled {
         background-color: transparent;
-        border: 1px solid #1f2f478f;
+        border: transparent;
     }
 
     .btnDay {
