@@ -153,6 +153,29 @@ function initWebsite() {
         .getElementById("currentMonthLabelAndButtons")
         .appendChild(btnNextMonth);
 
+
+
+    //     year drop Down
+    const yearDropDown = document.createElement("select");
+    yearDropDown.tagName = "yearDropDown";
+    yearDropDown.id = "yearDropDown";
+    yearDropDown.innerHTML = "Year"; // next month
+    
+    document.getElementById("currentMonthLabelAndButtons").appendChild(yearDropDown);
+        var min = 1995,
+        max = 2041,
+        select = document.getElementById('yearDropDown');
+    
+    for (var i = min; i<=max; i++){
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        yearDropDown.appendChild(opt);
+    }
+    
+    select.value = new Date().getFullYear();    
+
+
     // divDaysLabel element
     const divDaysLabel = document.createElement("grid-container");
     divDaysLabel.tagName = "divDaysLabel";
