@@ -401,7 +401,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 		//monthCells[currentDay - 1] = btnDay;
 
 		// New
-		btnDay.addEventListener("click", function () {
+		/*btnDay.addEventListener("click", function () {
 			if (currentMonth == 12) {
 				console.log("month is zero!");
 				const tempCurrentMonth = 12;
@@ -428,7 +428,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 				"/",
 				selectedDay.getFullYear()
 			);
-		});
+		});*/
 		// new end
 	}
 
@@ -644,25 +644,24 @@ initWebsite();
 displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 displaySelectedDatePlan(new Date()); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 // monthArray saves the daybuttons to each month
-const monthArray = 
-	{"January": {},
-	"February": {},
-	"March": {},
-	"April": {},
-	"May": {},
-	"June": {},
-	"July": {},
-	"August": {},
-	"September": {},
-	"October": {},
-	"November": {},
-	"December": {},
-	};
+const monthArray = {
+	January: {},
+	February: {},
+	March: {},
+	April: {},
+	May: {},
+	June: {},
+	July: {},
+	August: {},
+	September: {},
+	October: {},
+	November: {},
+	December: {},
+};
 const years = {};
 const dayArray = {};
 
-function returnMonth(monthString)
-{
+function returnMonth(monthString) {
 	switch (monthString) {
 		case "January":
 			return 0; // January
@@ -704,109 +703,105 @@ function returnMonth(monthString)
 }
 
 var storeDateNotes = {};
-function saveNote()
-{ 
-
+function saveNote() {
 	let noteText = document.getElementById("selectedDateTextArea");
-	 
+
 	// Splits year and month so you can use the separately
 	let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
 	let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
 	let selectedYear = monthYearSplit[1];
 	let selectedMonth = monthYearSplit[0];
 
-	for(let dayNum = 1; dayNum < 32; dayNum++)
-	{
-		let currentYMD = selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
-		if(storeDateNotes[currentYMD])
-		{
+	for (let dayNum = 1; dayNum < 32; dayNum++) {
+		let currentYMD =
+			selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
+		if (storeDateNotes[currentYMD]) {
 			let dayButton = document.getElementById("btnDay" + dayNum);
 			dayButton.style.borderColor = "black";
 		}
 	}
 	// For loop for creating an array with all the days connected to the notes
-	for(let button = 1; button < 32; button++)
-	{
+	for (let button = 1; button < 32; button++) {
 		// Easier to write
 		let stringBtn = "btnDay" + button;
 		// ARRAY with all the buttondays btnDay1, btnDay2 etc....
 	}
-	try{
-		for(let button = 1; button < 32; button++)
-		{	
-		dayArray["btnDay" + button];
-		// ID of buttons
-		let dayButton = document.getElementById("btnDay" + button);
-		// dfpsdejfpijdp
-		if(selectedMonth != monthArray[selectedMonth])
-		{
-			monthArray[selectedMonth] = dayArray;
-		}
-			if(years[selectedYear])
-			{
-				if(monthArray[selectedMonth])
-				{
-					if(dayArray[dayButton.id] != "Add a note:")
-					{
+	try {
+		for (let button = 1; button < 32; button++) {
+			dayArray["btnDay" + button];
+			// ID of buttons
+			let dayButton = document.getElementById("btnDay" + button);
+			// dfpsdejfpijdp
+			if (selectedMonth != monthArray[selectedMonth]) {
+				monthArray[selectedMonth] = dayArray;
+			}
+			if (years[selectedYear]) {
+				if (monthArray[selectedMonth]) {
+					if (dayArray[dayButton.id] != "Add a note:") {
 						dayButton.style.borderColor = "black";
 					}
 				}
 			}
-		// Text of textfield
-		noteText.value = "";
-		// This removes a note that has been made if button is double clicked
-		dayButton.addEventListener("dblclick", function()
-		{
-			if(dayButton.style.borderColor == "black")
-			{
-				noteText.value = "";
-				noteText.placeholder = "Display notes for the selected date here...";
-				dayButton.style.borderColor = "white";	
-			}
-		});
-		// If btnDay1-btnDay31 is clicked this activates
-		dayButton.addEventListener("click", function()
-		{
-			// Show the selected date at the top after clicking button NOT STARTED::::::::::
+			// Text of textfield
+			noteText.value = "";
+			// This removes a note that has been made if button is double clicked
+			dayButton.addEventListener("dblclick", function () {
+				if (dayButton.style.borderColor == "black") {
+					noteText.value = "";
+					noteText.placeholder =
+						"Display notes for the selected date here...";
+					dayButton.style.borderColor = "white";
+				}
+			});
+			// If btnDay1-btnDay31 is clicked this activates
+			dayButton.addEventListener("click", function () {
+				// Show the selected date at the top after clicking button NOT STARTED::::::::::
 
-			// If a note has been saved this displays it
-			if(dayButton.style.borderColor == "black")
-			{
-				noteText.placeholder = dayArray[dayButton.id];
-				
-			}
-			// dayButton.id = btnDay
-			// dayArray[dayButton.id] = texten "Add a note:"
+				// If a note has been saved this displays it
+				if (dayButton.style.borderColor == "black") {
+					noteText.placeholder = dayArray[dayButton.id];
+				}
+				// dayButton.id = btnDay
+				// dayArray[dayButton.id] = texten "Add a note:"
 
-			// Clicking button after writing something saves it
-			if(noteText.value.length != 0 && dayButton.style.borderColor != "black")
-			{	
-				// Saves note to array. Write saved then resets after 1 second
-				dayArray[dayButton.id] = noteText.value;
-				// Change color of button that has saved note
-				dayButton.style.borderColor = "black";
-				noteText.placeholder = "Note saved";
-				setTimeout(function(){ noteText.value = ""; }, 1000);	
-					
-				getNum = dayButton.id.replace( /^\D+/g, '');
-				let date = new Date(selectedYear, returnMonth(selectedMonth), getNum)
-				let numDate = date.getFullYear() +":"+ date.getMonth()+":"+getNum;
-				storeDateNotes[numDate] = dayArray[dayButton.id];
-			}
-			// If a button has no note the default placeholder is shown
-			if(dayButton.style.borderColor != "black")
-			{
-				noteText.placeholder = "Display notes for the selected date here...";
-			}		
-		})
+				// Clicking button after writing something saves it
+				if (
+					noteText.value.length != 0 &&
+					dayButton.style.borderColor != "black"
+				) {
+					// Saves note to array. Write saved then resets after 1 second
+					dayArray[dayButton.id] = noteText.value;
+					// Change color of button that has saved note
+					dayButton.style.borderColor = "black";
+					noteText.placeholder = "Note saved";
+					setTimeout(function () {
+						noteText.value = "";
+					}, 1000);
+
+					getNum = dayButton.id.replace(/^\D+/g, "");
+					let date = new Date(
+						selectedYear,
+						returnMonth(selectedMonth),
+						getNum
+					);
+					let numDate =
+						date.getFullYear() +
+						":" +
+						date.getMonth() +
+						":" +
+						getNum;
+					storeDateNotes[numDate] = dayArray[dayButton.id];
+				}
+				// If a button has no note the default placeholder is shown
+				if (dayButton.style.borderColor != "black") {
+					noteText.placeholder =
+						"Display notes for the selected date here...";
+				}
+			});
 		}
-	}catch(err){
-		
-	}	
+	} catch (err) {}
 	// Updates the month and year everytime month changes
-	document
-		.getElementById("btnNextMonth")
-		.addEventListener("click", saveNote);
+	document.getElementById("btnNextMonth").addEventListener("click", saveNote);
 	document
 		.getElementById("btnPreviousMonth")
 		.addEventListener("click", saveNote);
