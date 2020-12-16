@@ -7,12 +7,13 @@ let currentDate = today.getDate();
 let currentMonth = today.getMonth() + 1;
 let currentYear = today.getFullYear();
 
-const monthCells = [7 * 5]; // Maximum amount of cells in the month-grid.
+const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-grid.
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
 
-const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+// Sunday is twice for getting day-names correctly...
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHNAMES = [
 	"January",
 	"February",
@@ -47,11 +48,11 @@ function Day(dayNumber, monthNumber, yearNumber, notes) {
 }
 
 // Buttons displaying the current month.
-let currentMonthButtons = [];
+let currentMonthButtons = [maximumAmountOfButtons];
 
 // Dates the user have registered.
 let registeredDays = [];
-let newDay = new Day(20, 11, 2020, ""); // REMOVED BY ROBERT - USED IN SAVENOTE
+let newDay = new Day(20, 11, 2020, "This is a note."); // Test
 registeredDays.push(newDay);
 
 registeredDays.forEach((day) => {
@@ -110,19 +111,61 @@ function initWebsite() {
 	monthWrapper.id = "monthWrapper";
 	document.getElementById("mainWrapper").appendChild(monthWrapper);
 
+	const currentMonthLabelAndButtons = document.createElement("div");
+	currentMonthLabelAndButtons.tagName = "currentMonthLabelAndButtons";
+	currentMonthLabelAndButtons.id = "currentMonthLabelAndButtons";
+	document
+		.getElementById("monthWrapper")
+		.appendChild(currentMonthLabelAndButtons);
+
+	// btnPreviousMonth element
+	const btnPreviousMonth = document.createElement("button");
+	btnPreviousMonth.tagName = "btnPreviousMonth";
+	btnPreviousMonth.id = "btnPreviousMonth";
+	btnPreviousMonth.innerHTML = "<"; //Previous Month
+	btnPreviousMonth.addEventListener("click", function () {
+		previousMonthEvent();
+		updateWeekNumbers();
+	});
+	document
+		.getElementById("currentMonthLabelAndButtons")
+		.appendChild(btnPreviousMonth);
+
 	// selectedMonthLabel element
 	const selectedMonthLabel = document.createElement("label");
 	selectedMonthLabel.tagName = "selectedMonthLabel";
 	selectedMonthLabel.id = "selectedMonthLabel";
 	selectedMonthLabel.innerHTML = "June 2021";
-	document.getElementById("monthWrapper").appendChild(selectedMonthLabel);
+	document
+		.getElementById("currentMonthLabelAndButtons")
+		.appendChild(selectedMonthLabel);
+
+	// btnNextMonth element
+	const btnNextMonth = document.createElement("button");
+	btnNextMonth.tagName = "btnNextMonth";
+	btnNextMonth.id = "btnNextMonth";
+	btnNextMonth.innerHTML = ">"; // next month
+	btnNextMonth.addEventListener("click", function () {
+		nextMonthEvent();
+		updateWeekNumbers();
+	});
+	document
+		.getElementById("currentMonthLabelAndButtons")
+		.appendChild(btnNextMonth);
+
+	// divDaysLabel element
+	const divDaysLabel = document.createElement("grid-container");
+	divDaysLabel.tagName = "divDaysLabel";
+	divDaysLabel.id = "divDaysLabel";
+	document.getElementById("monthWrapper").appendChild(divDaysLabel);
 
 	// daysLabel element
 	const daysLabel = document.createElement("label");
 	daysLabel.tagName = "daysLabel";
 	daysLabel.id = "daysLabel";
-	daysLabel.innerHTML = "<br>Mon Tue Wed Thu Fri Sat Sun";
-	document.getElementById("monthWrapper").appendChild(daysLabel);
+	daysLabel.innerHTML =
+		"<span>#</span> <span>Mon</span> <span>Tue</span> <span>Wed</span <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span>";
+	document.getElementById("divDaysLabel").appendChild(daysLabel);
 
 	// weekAndMonthGrid element
 	const weekAndMonthGrid = document.createElement("grid-container");
@@ -150,37 +193,18 @@ function initWebsite() {
 	monthButtonsWrapper.id = "monthButtonsWrapper";
 	document.getElementById("mainWrapper").appendChild(monthButtonsWrapper);
 
-	// btnPreviousMonth element
-	const btnPreviousMonth = document.createElement("button");
-	btnPreviousMonth.tagName = "btnPreviousMonth";
-	btnPreviousMonth.id = "btnPreviousMonth";
-	btnPreviousMonth.innerHTML = "<< Previous Month";
-	btnPreviousMonth.addEventListener("click", function () {
-		previousMonthEvent();
-		updateWeekNumbers();
-	});
-	document
-		.getElementById("monthButtonsWrapper")
-		.appendChild(btnPreviousMonth);
-
-	// btnNextMonth element
-	const btnNextMonth = document.createElement("button");
-	btnNextMonth.tagName = "btnNextMonth";
-	btnNextMonth.id = "btnNextMonth";
-	btnNextMonth.innerHTML = "Next Month >>";
-	btnNextMonth.addEventListener("click", function () {
-		nextMonthEvent();
-		updateWeekNumbers();
-	});
-	document.getElementById("monthButtonsWrapper").appendChild(btnNextMonth);
-
 	// Update text of selectedMonthLabel.
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[today.getMonth()] + " " + today.getFullYear();
 
 	console.log("this month: " + currentMonth); // test
 
-	currentDateDisplay ();
+	// Temp: To show disabled buttons in init.
+	nextMonthEvent();
+	previousMonthEvent();
+	// Temp end.
+
+	currentDateDisplay();
 	displayRedWeekend();
 	displayWeekNumbers();
 }
@@ -210,11 +234,23 @@ function previousMonthEvent() {
 	today.setMonth(currentMonth);
 	today.setFullYear(currentYear);
 
+	removeDisabledButtons();
+	featureCalendarDisplay();
+
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
-	console.log("this month: " + currentMonth);
+	//console.log("this month: " + currentMonth);
+
+	debugLogCurrentViewedMonthInfo();
+}
+
+/**
+ * Prints month and year in view.
+ */
+function debugLogCurrentViewedMonthInfo() {
+	console.log("Current view month: ", currentMonth, " year: ", currentYear);
 }
 
 /**
@@ -231,11 +267,85 @@ function nextMonthEvent() {
 	today.setMonth(currentMonth);
 	today.setFullYear(currentYear);
 
+	removeDisabledButtons();
+	featureCalendarDisplay();
+
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
 	//console.log("this month: " + currentMonth); // test
+
+	debugLogCurrentViewedMonthInfo();
+}
+
+/**
+ * Adds disabled buttons.
+ */
+function addDisabledButtonToMonthGrid() {
+	const btnDay = document.createElement("button");
+	btnDay.tagName = "btnDayNone";
+	btnDay.id = "btnDayNone";
+	btnDay.className = "btnDayNone";
+	btnDay.innerHTML = "";
+	btnDay.disabled = true;
+
+	currentMonthButtons.unshift(btnDay);
+
+	document.getElementById("monthGrid").appendChild(btnDay);
+}
+
+/**
+ * Removes disabled buttons.
+ */
+function removeDisabledButtons() {
+	for (let i = 0; i < 7; i++) {
+		if (document.getElementById("btnDayNone") != null) {
+			document.getElementById("btnDayNone").remove();
+		}
+	}
+}
+
+/**
+ * Displays the buttons like a real calendar.
+ */
+function featureCalendarDisplay() {
+	let firstDay = new Date(currentYear, currentMonth - 1, 1);
+	let firstDayName = WEEKDAYS[firstDay.getDay()];
+	//console.log("First day of month: ", firstDayName);
+
+	switch (firstDayName) {
+		case "Sun":
+			for (i = WEEKDAYS.indexOf("Sat"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Sat":
+			for (i = WEEKDAYS.indexOf("Fri"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Fri":
+			for (i = WEEKDAYS.indexOf("Thu"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Thu":
+			for (i = WEEKDAYS.indexOf("Wed"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Wed":
+			for (i = WEEKDAYS.indexOf("Tue"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Tue":
+			for (i = WEEKDAYS.indexOf("Mon"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+	}
 }
 
 /**
@@ -254,10 +364,12 @@ function updateMonthGrid(amountOfDaysInMonth) {
 
 				//console.log("previous buttons: " + currentMonthButtons.length); // test
 				currentMonthButtons.length = 0; // Clear the array.
+				currentMonthButtons.length = maximumAmountOfButtons;
 			}
 		}
 	}
 
+	// Maybe no needed...
 	if (
 		amountOfDaysInMonth < 28
 			? (amountOfDaysInMonth = 28)
@@ -268,6 +380,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 			? (amountOfDaysInMonth = 31)
 			: amountOfDaysInMonth
 	);
+	// Maybe end.
 
 	for (
 		let currentDay = 1;
@@ -286,6 +399,7 @@ function updateMonthGrid(amountOfDaysInMonth) {
 	}
 
 	oldMonthAmountOfDays = amountOfDaysInMonth;
+	currentDateDisplay();
 }
 
 /**
@@ -312,11 +426,15 @@ function displayRedWeekend() {
 	let selectedMonth = monthYearSplit[0];
 
 	// Updates the month and year everytime month changes
-	document.getElementById("btnNextMonth").addEventListener("click", displayRedWeekend);
-	document.getElementById("btnPreviousMonth").addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnNextMonth")
+		.addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnPreviousMonth")
+		.addEventListener("click", displayRedWeekend);
 
 	let monthNum = 0;
-	switch(selectedMonth){
+	switch (selectedMonth) {
 		case MONTHNAMES[0]:
 			monthNum = 0; // January
 			break;
@@ -336,10 +454,10 @@ function displayRedWeekend() {
 			monthNum = 5;
 			break;
 		case MONTHNAMES[6]:
-			monthNum = 6; 
+			monthNum = 6;
 			break;
 		case MONTHNAMES[7]:
-			monthNum = 7; 
+			monthNum = 7;
 			break;
 		case MONTHNAMES[8]:
 			monthNum = 8;
@@ -359,23 +477,12 @@ function displayRedWeekend() {
 		if (d.getDay() == 6 || d.getDay() == 0) {
 			try {
 				var buttonId = "btnDay" + day;
-				document.getElementById(buttonId).style.background = "red";
+				document.getElementById(buttonId).style.background =
+					"rgb(158, 0, 0)";
 			} catch (err) {}
 		}
 	}
 }
-initWebsite();
-
-/*
-function getCurrentTime() {
-	const fullDate = today.toISOString().slice(0, 10);
-
-	document.getElementById("selectedMonth").innerHTML =
-		monthNames[today.getMonth()] + " " + today.getFullYear();
-}
-*/
-
-//getCurrentTime();
 
 // Returning week number of the date you send to the function
 function getWeekNumber(d) {
@@ -426,82 +533,223 @@ function updateWeekNumbers() {
 }
 
 function getDayOfTheWeek(date) {
-    return new Date(date).toLocaleString("en-US", {
-        weekday: "long",
-    });
+	return new Date(date).toLocaleString("en-US", {
+		weekday: "long",
+	});
 }
 
-function displaySelectedDatePlan(pickedDate) { // (year, month, date)
-    let date = pickedDate.getDate();
-    let day = getDayOfTheWeek(pickedDate);
-    let monthName = MONTHNAMES[pickedDate.getMonth()];
-    let monthNumber = pickedDate.getMonth();
-    let year = pickedDate.getFullYear();
+function displaySelectedDatePlan(pickedDate) {
+	// (year, month, date)
+	let date = pickedDate.getDate();
+	let day = getDayOfTheWeek(pickedDate);
+	let monthName = MONTHNAMES[pickedDate.getMonth()];
+	let monthNumber = pickedDate.getMonth();
+	let year = pickedDate.getFullYear();
 
-    document.getElementById("selectedDateLabel").textContent =
-        day + " " + date + " " + monthName;
-    getAndDisplayNotes();
+	document.getElementById("selectedDateLabel").textContent =
+		day + " " + date + " " + monthName;
+	getAndDisplayNotes();
 
-    function getAndDisplayNotes() {
-        for (let i = 0; i < registeredDays.length; i++) {
-            if (
-                registeredDays[i].dayNumber === date &&
-                registeredDays[i].monthNumber === monthNumber &&
-                registeredDays[i].yearNumber === year
-            ) {
-                if (registeredDays[i].notes != null)
-                    document.getElementById(
-                        "selectedDateTextArea"
-                    ).textContent = registeredDays[i].notes;
-                break;
-            }
-        }
-    }
+	function getAndDisplayNotes() {
+		for (let i = 0; i < registeredDays.length; i++) {
+			if (
+				registeredDays[i].dayNumber === date &&
+				registeredDays[i].monthNumber === monthNumber &&
+				registeredDays[i].yearNumber === year
+			) {
+				if (registeredDays[i].notes != null)
+					document.getElementById(
+						"selectedDateTextArea"
+					).textContent = registeredDays[i].notes;
+				break;
+			}
+		}
+	}
 }
 
-displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
-
-function currentDateDisplay (){
-	var buttonId = "btnDay" + currentDate;
-    document.getElementById(buttonId).style.background = "yellow";          
+function currentDateDisplay() {
+	let nowDay = new Date();
+	let nowDate = nowDay.getDate();
+	let nowMonth = nowDay.getMonth() + 1;
+	let nowYear = nowDay.getFullYear();
+	if (
+		currentDate === nowDate &&
+		currentMonth === nowMonth &&
+		currentYear === nowYear
+	) {
+		var buttonId = "btnDay" + nowDate;
+		document.getElementById(buttonId).style.background = "yellow";
+	}
 }
 
-function addButtonToNote()
+initWebsite();
+displaySelectedDatePlan(new Date()); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
+// monthArray saves the daybuttons to each month
+const monthArray = 
+	{"January": {},
+	"February": {},
+	"March": {},
+	"April": {},
+	"May": {},
+	"June": {},
+	"July": {},
+	"August": {},
+	"September": {},
+	"October": {},
+	"November": {},
+	"December": {},
+	};
+const years = {};
+const dayArray = {};
+
+function returnMonth(monthString)
 {
-	var button = document.createElement("button");
-	button.innerHTML = "ADD";
-	var deleteButton = document.createElement("button");
-	button.innerHTML = "Delete";
-
-	var div = document.getElementById("mainWrapper");
-	div.appendChild(button);
-	div.appendChild(deleteButton);
-	console.log(div);
+	switch (monthString) {
+		case "January":
+			return 0; // January
+			break;
+		case "February":
+			return 1; // February
+			break;
+		case "Mars":
+			return 2; // Mars etc....
+			break;
+		case "April":
+			return 3;
+			break;
+		case "May":
+			return 4;
+			break;
+		case "June":
+			return 5;
+			break;
+		case "July":
+			return 6;
+			break;
+		case "August":
+			return 7;
+			break;
+		case "September":
+			return 8;
+			break;
+		case "October":
+			return 9;
+			break;
+		case "November":
+			return 10;
+			break;
+		case "December":
+			return 11;
+			break;
+	}
 }
-addButtonToNote();
+
+var storeDateNotes = {};
 function saveNote()
-{
-	
-	let buttonList = {};
+{ 
+
+	let noteText = document.getElementById("selectedDateTextArea");
+	 
+	// Splits year and month so you can use the separately
+	let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
+	let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
+	let selectedYear = monthYearSplit[1];
+	let selectedMonth = monthYearSplit[0];
+
+	for(let dayNum = 1; dayNum < 32; dayNum++)
+	{
+		let currentYMD = selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
+		if(storeDateNotes[currentYMD])
+		{
+			let dayButton = document.getElementById("btnDay" + dayNum);
+			dayButton.style.borderColor = "black";
+		}
+	}
+	// For loop for creating an array with all the days connected to the notes
 	for(let button = 1; button < 32; button++)
 	{
-		try{
-			let dayButton = document.getElementById("btnDay" + button);
-			buttonList["btnDay" + button] = "";
-			dayButton.addEventListener("click", function(){
-				let noteText = document.getElementById("selectedDateTextArea").value;
-				buttonList["btnDay" + button] = noteText;
-				dayButton.textContent = dayButton.textContent + "!";
-				console.log(buttonList);
-			});
-
-		}catch(err){
-			
-		}
-		
+		// Easier to write
+		let stringBtn = "btnDay" + button;
+		// ARRAY with all the buttondays btnDay1, btnDay2 etc....
 	}
-	
-	console.log(buttonList);	
-}
-saveNote()
+	try{
+		for(let button = 1; button < 32; button++)
+		{	
+		dayArray["btnDay" + button];
+		// ID of buttons
+		let dayButton = document.getElementById("btnDay" + button);
+		// dfpsdejfpijdp
+		if(selectedMonth != monthArray[selectedMonth])
+		{
+			monthArray[selectedMonth] = dayArray;
+		}
+			if(years[selectedYear])
+			{
+				if(monthArray[selectedMonth])
+				{
+					if(dayArray[dayButton.id] != "Add a note:")
+					{
+						dayButton.style.borderColor = "black";
+					}
+				}
+			}
+		// Text of textfield
+		noteText.value = "";
+		// This removes a note that has been made if button is double clicked
+		dayButton.addEventListener("dblclick", function()
+		{
+			if(dayButton.style.borderColor == "black")
+			{
+				noteText.value = "";
+				noteText.placeholder = "Display notes for the selected date here...";
+				dayButton.style.borderColor = "white";	
+			}
+		});
+		// If btnDay1-btnDay31 is clicked this activates
+		dayButton.addEventListener("click", function()
+		{
+			// Show the selected date at the top after clicking button NOT STARTED::::::::::
 
+			// If a note has been saved this displays it
+			if(dayButton.style.borderColor == "black")
+			{
+				noteText.placeholder = dayArray[dayButton.id];
+				
+			}
+			// dayButton.id = btnDay
+			// dayArray[dayButton.id] = texten "Add a note:"
+
+			// Clicking button after writing something saves it
+			if(noteText.value.length != 0 && dayButton.style.borderColor != "black")
+			{	
+				// Saves note to array. Write saved then resets after 1 second
+				dayArray[dayButton.id] = noteText.value;
+				// Change color of button that has saved note
+				dayButton.style.borderColor = "black";
+				noteText.placeholder = "Note saved";
+				setTimeout(function(){ noteText.value = ""; }, 1000);	
+					
+				getNum = dayButton.id.replace( /^\D+/g, '');
+				let date = new Date(selectedYear, returnMonth(selectedMonth), getNum)
+				let numDate = date.getFullYear() +":"+ date.getMonth()+":"+getNum;
+				storeDateNotes[numDate] = dayArray[dayButton.id];
+			}
+			// If a button has no note the default placeholder is shown
+			if(dayButton.style.borderColor != "black")
+			{
+				noteText.placeholder = "Display notes for the selected date here...";
+			}		
+		})
+		}
+	}catch(err){
+		
+	}	
+	// Updates the month and year everytime month changes
+	document
+		.getElementById("btnNextMonth")
+		.addEventListener("click", saveNote);
+	document
+		.getElementById("btnPreviousMonth")
+		.addEventListener("click", saveNote);
+}
+saveNote();
