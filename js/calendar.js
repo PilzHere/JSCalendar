@@ -11,6 +11,7 @@ const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
+var dropDownYear;
 
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -153,13 +154,15 @@ function initWebsite() {
         .getElementById("currentMonthLabelAndButtons")
         .appendChild(btnNextMonth);
 
-
-
     //     year drop Down
     const yearDropDown = document.createElement("select");
     yearDropDown.tagName = "yearDropDown";
     yearDropDown.id = "yearDropDown";
-    yearDropDown.innerHTML = "Year"; // next month
+    //yearDropDown.innerHTML = "Year"; 
+    yearDropDown.addEventListener("change", function() {
+        yearDropDownEvent();
+
+    });
     
     document.getElementById("currentMonthLabelAndButtons").appendChild(yearDropDown);
         var min = 1995,
@@ -170,10 +173,14 @@ function initWebsite() {
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = i;
+        dropDownYear = opt.value;
         yearDropDown.appendChild(opt);
     }
-    
-    select.value = new Date().getFullYear();    
+    select.value = new Date().getFullYear();
+    yearDropDown.addEventListener("change", function() {
+        yearDropDownEvent();
+
+    });    
 
 
     // divDaysLabel element
@@ -631,3 +638,17 @@ function currentDateDisplay() {
 
 initWebsite();
 displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
+
+// year Drop down selection function
+function yearDropDownEvent() {
+    currentYear=dropDownYear;
+
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+    selectedMonthLabel.innerHTML =
+        MONTHNAMES[currentMonth - 1] + " " + currentYear;
+
+    //console.log("this month: " + currentMonth);
+
+    debugLogCurrentViewedMonthInfo();
+}
+console.log(dropDownYear);

@@ -71,6 +71,11 @@ body {
     width: 25px;
     border-right: #30475e25 1px solid;
 }
+#weekGrid :hover{
+    font-size: 200%;
+    color:orange;  
+
+}
 
 #weekGrid > * {
     display: flex;
@@ -89,7 +94,7 @@ body {
 }
 #monthGrid :hover{
     font-size: 200%;
-    color:orange;  
+    caret-color: auto;
 
 }
 
@@ -104,6 +109,11 @@ body {
     padding-top: 6px;
     display: grid;
     grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+#daysLabel :hover{
+    font-size: 125%;
+    color:orange;  
+
 }
 
 #currentMonthLabelAndButtons {
