@@ -1,172 +1,179 @@
+@font-face {
+	font-family: "MyWebFont";
+	src: url("../fonts/Consolas.woff2") format("woff2"),
+		url("../fonts/Consolas.woff") format("woff"),
+		url("../fonts/Consolas.ttf") format("truetype");
+}
+
 html {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    color: #222831;
-    background-color: rgba(0, 0, 0, 0.699);
-    height: 100vh;
-    font-family: Consolas;
+	margin: 0;
+	padding: 0;
+	color: #222831;
+	background-color: rgba(0, 0, 0, 0.699);
+	height: 100vh;
+	font-family: "MyWebFont";
 }
 
 #mainWrapper {
-    background-color: #e8e8e8;
-    margin: 20px auto;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 12px 0 rgba(0, 0, 0, 0.63);
+	background-color: #e8e8e8;
+	margin: 20px auto;
+	max-width: 700px;
+	border-radius: 10px;
+	box-shadow: 10px 10px 12px 0 rgba(0, 0, 0, 0.63);
 }
 
 #currentDayWrapper {
-    background-color: #30475e;
+	background-color: #30475e;
 }
 
 #selectedDateTextArea {
-    margin: 2%;
-    width: 94%;
-    min-height: 150px;
-    font-size: 12pt;
-    resize: none;
-    background-color: #e8e8e8;
+	margin: 2%;
+	width: 94%;
+	min-height: 150px;
+	font-size: 12pt;
+	resize: none;
+	background-color: #e8e8e8;
 }
 
 #daysLabel {
-    text-align: center;
-    background-color: #30475e;
-    color: #e8e8e8;
-    font-size: 18px;
+	text-align: center;
+	background-color: #30475e;
+	color: #e8e8e8;
+	font-size: 18px;
 }
 
 #weekAndMonthGrid {
-    display: grid;
-    grid-template-columns: 25px 1fr;
-    height: 250px;
-    margin-bottom: 2px;
+	display: grid;
+	grid-template-columns: 25px 1fr;
+	height: 250px;
+	margin-bottom: 2px;
 }
 
 #selectedDateLabel {
-    color: #e8e8e8;
-    font-size: 14pt;
-    margin-left: 2%;
+	color: #e8e8e8;
+	font-size: 14pt;
+	margin-left: 2%;
 }
 
 #appName {
-    display: flex;
-    justify-content: center;
-    color: #e8e8e8;
-    font-weight: 600;
-    font-size: 18pt;
-    background-color: #30475e;
-    padding-bottom: 5%;
-    padding-top: 3%;
+	display: flex;
+	justify-content: center;
+	color: #e8e8e8;
+	font-weight: 600;
+	font-size: 18pt;
+	background-color: #30475e;
+	padding-bottom: 5%;
+	padding-top: 3%;
 }
 
 #weekGrid {
-    display: grid;
-    grid-template-rows: 16.67% 16.67% 16.67% 16.67% 16.67% 16.67%;
-    height: 250px;
-    width: 25px;
-    border-right: #30475e25 1px solid;
+	display: grid;
+	grid-template-rows: 16.67% 16.67% 16.67% 16.67% 16.67% 16.67%;
+	height: 250px;
+	width: 25px;
+	border-right: #30475e25 1px solid;
 }
 
 #weekGrid > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 0px;
-    font-weight: 600;
-    color: #222831b0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 0px;
+	font-weight: 600;
+	color: #222831b0;
 }
 
 #monthGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-    height: 250px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	height: 250px;
 }
 
 #monthWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 #daysLabel {
-    font-weight: 600;
-    padding-top: 6px;
-    display: grid;
-    grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	font-weight: 600;
+	padding-top: 6px;
+	display: grid;
+	grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 #currentMonthLabelAndButtons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #e8e8e8;
-    height: 100px;
-    font-size: 20pt;
-    font-weight: 600;
-    background-color: #30475e;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #e8e8e8;
+	height: 100px;
+	font-size: 20pt;
+	font-weight: 600;
+	background-color: #30475e;
 }
 
 #divDaysLabel {
-    height: 25px;
+	height: 25px;
 }
 
 button:disabled {
-    background-color: transparent;
-    border: transparent;
+	background-color: transparent;
+	border: transparent;
 }
 
 .btnDay {
-    background-color: transparent !important;
-    border: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #222831;
-    font-size: 12pt;
-    text-decoration: none;
-    font-weight: 600;
+	background-color: transparent !important;
+	border: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	color: #222831;
+	font-size: 12pt;
+	text-decoration: none;
+	font-weight: 600;
 }
 
 #btnNextMonth,
 #btnPreviousMonth {
-    background-color: transparent;
-    border: transparent;
-    border-radius: 28px;
-    display: inline-block;
-    cursor: pointer;
-    color: #e8e8e8;
-    font-size: 20pt;
-    font-weight: bold;
-    padding: 5px 20px;
-    text-decoration: none;
+	background-color: transparent;
+	border: transparent;
+	border-radius: 28px;
+	display: inline-block;
+	cursor: pointer;
+	color: #e8e8e8;
+	font-size: 20pt;
+	font-weight: bold;
+	padding: 5px 20px;
+	text-decoration: none;
 }
 
 @media only screen and (max-width: 414px) {
-    #mainWrapper {
-        margin: 0;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    #selectedDateTextArea {
-        height: 150px;
-    }
-    #daysLabel {
-        font-size: 12pt;
-    }
-    #currentMonthLabelAndButtons {
-        height: 50px;
-        font-size: 16pt;
-    }
+	#mainWrapper {
+		margin: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	#selectedDateTextArea {
+		height: 150px;
+	}
+	#daysLabel {
+		font-size: 12pt;
+	}
+	#currentMonthLabelAndButtons {
+		height: 50px;
+		font-size: 16pt;
+	}
 
-    #btnNextMonth,
-    #btnPreviousMonth {
-        font-size: 16pt;
-    }
+	#btnNextMonth,
+	#btnPreviousMonth {
+		font-size: 16pt;
+	}
 }
