@@ -641,7 +641,6 @@ function currentDateDisplay() {
 }
 
 initWebsite();
-displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 displaySelectedDatePlan(new Date()); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
 // monthArray saves the daybuttons to each month
 const monthArray = {
@@ -669,7 +668,7 @@ function returnMonth(monthString) {
 		case "February":
 			return 1; // February
 			break;
-		case "Mars":
+		case "March":
 			return 2; // Mars etc....
 			break;
 		case "April":
@@ -755,8 +754,10 @@ function saveNote() {
 			});
 			// If btnDay1-btnDay31 is clicked this activates
 			dayButton.addEventListener("click", function () {
-				// Show the selected date at the top after clicking button NOT STARTED::::::::::
-
+				// Show the selected date at the top after clicking button
+				// Extract the date number from dayButton id
+				let date = dayButton.id.match(/\d+/)[0];
+				displaySelectedDatePlan(new Date(selectedYear, returnMonth(selectedMonth), date));
 				// If a note has been saved this displays it
 				if (dayButton.style.borderColor == "black") {
 					noteText.placeholder = dayArray[dayButton.id];
