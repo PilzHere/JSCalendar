@@ -87,6 +87,11 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     height: 250px;
 }
+#monthGrid :hover{
+    font-size: 200%;
+    color:orange;  
+
+}
 
 #monthWrapper {
     display: flex;
