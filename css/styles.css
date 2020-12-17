@@ -170,11 +170,16 @@ button:disabled {
     text-decoration: none;
 }
 #yearDropDown {
-	height: 25px;
-	width: 70px;
-    color: #222831;
-    font-size: large;
-	background-color: #e8e8e8;
+	height: 33px;
+	width: 90px;
+    color:#e8e8e8;
+    font-size: 20pt;
+	background-color: #30475e;
+	border: 1px solid #e8e8e8;
+	font-family: "MyWebFont";
+	font-weight: 600;
+	
+	
 }
 
 @media only screen and (max-width: 414px) {
@@ -197,5 +202,11 @@ button:disabled {
     #btnNextMonth,
     #btnPreviousMonth {
         font-size: 16pt;
-    }
+	}
+	#yearDropDown {
+		font-size: 16pt;
+		height: 27px;
+		width: 75px;
+		
+	}
 }
