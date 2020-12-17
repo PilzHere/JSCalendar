@@ -71,11 +71,10 @@ body {
     padding-top: 3%;
 }
 
-
 #selectedMonthAndYearDiv {
-	width: 250px;
-	display: flex;
-	justify-content: space-evenly;
+    width: 250px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 #weekGrid {
@@ -170,16 +169,14 @@ button:disabled {
     text-decoration: none;
 }
 #yearDropDown {
-	height: 33px;
-	width: 90px;
-    color:#e8e8e8;
+    height: 33px;
+    width: 90px;
+    color: #e8e8e8;
     font-size: 20pt;
-	background-color: #30475e;
-	border: 1px solid #e8e8e8;
-	font-family: "MyWebFont";
-	font-weight: 600;
-	
-	
+    background-color: #30475e;
+    border: 1px solid #e8e8e8;
+    font-family: "MyWebFont";
+    font-weight: 600;
 }
 
 @media only screen and (max-width: 414px) {
@@ -202,11 +199,10 @@ button:disabled {
     #btnNextMonth,
     #btnPreviousMonth {
         font-size: 16pt;
-	}
-	#yearDropDown {
-		font-size: 16pt;
-		height: 27px;
-		width: 75px;
-		
-	}
+    }
+    #yearDropDown {
+        font-size: 16pt;
+        height: 27px;
+        width: 75px;
+    }
 }
