@@ -11,7 +11,6 @@ const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
-var dropDownYear;
 
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -154,7 +153,7 @@ function initWebsite() {
         .getElementById("currentMonthLabelAndButtons")
         .appendChild(btnNextMonth);
 
-    //     year drop Down
+    // year drop down
     const yearDropDown = document.createElement("select");
     yearDropDown.tagName = "yearDropDown";
     yearDropDown.id = "yearDropDown";
@@ -164,8 +163,8 @@ function initWebsite() {
 
     });
     
-    document.getElementById("currentMonthLabelAndButtons").appendChild(yearDropDown);
-        var min = 1995,
+    document.getElementById("monthWrapper").appendChild(yearDropDown);
+        min = 1985,
         max = 2041,
         select = document.getElementById('yearDropDown');
     
@@ -173,14 +172,10 @@ function initWebsite() {
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = i;
-        dropDownYear = opt.value;
         yearDropDown.appendChild(opt);
     }
     select.value = new Date().getFullYear();
-    yearDropDown.addEventListener("change", function() {
-        yearDropDownEvent();
-
-    });    
+        
 
 
     // divDaysLabel element
@@ -641,14 +636,22 @@ displaySelectedDatePlan(new Date(2020, 11, 20)); // TEST TO SEE IF DAY, DATE and
 
 // year Drop down selection function
 function yearDropDownEvent() {
-    currentYear=dropDownYear;
+    var x = document.getElementById("yearDropDown").value;
+    currentYear = x;
+    today.setMonth(currentMonth);
+    today.setFullYear(currentYear);
+
+    removeDisabledButtons();
+    featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
     selectedMonthLabel.innerHTML =
         MONTHNAMES[currentMonth - 1] + " " + currentYear;
 
-    //console.log("this month: " + currentMonth);
+    //console.log("this month: " + currentMonth); // test
 
     debugLogCurrentViewedMonthInfo();
+    displayRedWeekend()
 }
-console.log(dropDownYear);
+
+
