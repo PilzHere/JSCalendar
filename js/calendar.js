@@ -481,7 +481,7 @@ function displayRedWeekend() {
 	// Gets the month and year from ID="selectedMonthLabel"
 	let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
 	let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
-	let selectedYear = monthYearSplit[1];
+	let selectedYear = currentYear;
 	let selectedMonth = monthYearSplit[0];
 
 	// Updates the month and year everytime month changes
