@@ -47,6 +47,10 @@ body {
 	font-size: 18px;
 }
 
+#daysLable:hover{
+	font-size: 200%;
+}
+
 #weekAndMonthGrid {
 	display: grid;
 	grid-template-columns: 25px 1fr;
@@ -95,6 +99,10 @@ body {
 	height: 250px;
 }
 
+#monthGrid :hover{
+	font-size: 200%;	
+}
+
 #monthWrapper {
 	display: flex;
 	flex-direction: column;
@@ -108,8 +116,9 @@ body {
 	grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 #daysLabel :hover{
-    font-size: 125%;
-    color:orange;  
+	font-size: 125%;
+	color: orange;
+    
 
 }
 
