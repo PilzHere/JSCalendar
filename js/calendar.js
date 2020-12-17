@@ -641,7 +641,7 @@ function currentDateDisplay() {
 }
 
 initWebsite();
-displaySelectedDatePlan(new Date()); // TEST TO SEE IF DAY, DATE and MONTH is changed for the selected day, And that notes shows up
+displaySelectedDatePlan(new Date()); // Starts with showing todays date
 // monthArray saves the daybuttons to each month
 const monthArray = {
 	January: {},
