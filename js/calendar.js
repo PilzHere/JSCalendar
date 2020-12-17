@@ -151,7 +151,27 @@ function initWebsite() {
 	});
 	document
 		.getElementById("currentMonthLabelAndButtons")
-		.appendChild(btnNextMonth);
+        .appendChild(btnNextMonth);
+    
+        // year drop down
+    const yearDropDown = document.createElement("select");
+    yearDropDown.tagName = "yearDropDown";
+    yearDropDown.id = "yearDropDown";
+    //yearDropDown.innerHTML = "Year"; 
+    yearDropDown.addEventListener("change", function() {
+        yearDropDownEvent();
+    });
+    document.getElementById("monthWrapper").appendChild(yearDropDown);
+        min = 1985,
+        max = 2041,
+        select = document.getElementById('yearDropDown');
+    for (var i = min; i<=max; i++){
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        yearDropDown.appendChild(opt);
+    }
+    select.value = new Date().getFullYear();
 
 	// divDaysLabel element
 	const divDaysLabel = document.createElement("grid-container");
@@ -197,16 +217,17 @@ function initWebsite() {
 	selectedMonthLabel.innerHTML =
 		MONTHNAMES[today.getMonth()] + " " + today.getFullYear();
 
-	console.log("this month: " + currentMonth); // test
+    console.log("this month: " + currentMonth); // test    
+    
 
 	// Temp: To show disabled buttons in init.
 	nextMonthEvent();
 	previousMonthEvent();
-	// Temp end.
-
-	currentDateDisplay();
+    // Temp end.
+    
 	displayRedWeekend();
-	displayWeekNumbers();
+    displayWeekNumbers();
+    currentDateDisplay();
 }
 
 /**
@@ -808,3 +829,23 @@ function saveNote() {
 		.addEventListener("click", saveNote);
 }
 saveNote();
+
+// year Drop down selection function
+function yearDropDownEvent() {
+    var x = document.getElementById("yearDropDown").value;
+    currentYear = x;
+    today.setMonth(currentMonth);
+    today.setFullYear(currentYear);
+
+    removeDisabledButtons();
+    featureCalendarDisplay();
+
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+    selectedMonthLabel.innerHTML =
+        MONTHNAMES[currentMonth - 1] + " " + currentYear;
+
+    //console.log("this month: " + currentMonth); // test
+
+    debugLogCurrentViewedMonthInfo();
+    displayRedWeekend()
+}

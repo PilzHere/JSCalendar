@@ -47,6 +47,10 @@ body {
 	font-size: 18px;
 }
 
+#daysLable:hover{
+	font-size: 200%;
+}
+
 #weekAndMonthGrid {
 	display: grid;
 	grid-template-columns: 25px 1fr;
@@ -95,6 +99,10 @@ body {
 	height: 250px;
 }
 
+#monthGrid :hover{
+	font-size: 200%;	
+}
+
 #monthWrapper {
 	display: flex;
 	flex-direction: column;
@@ -106,6 +114,12 @@ body {
 	padding-top: 6px;
 	display: grid;
 	grid-template-columns: 25px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+#daysLabel :hover{
+	font-size: 125%;
+	color: orange;
+    
+
 }
 
 #currentMonthLabelAndButtons {
@@ -153,6 +167,17 @@ button:disabled {
 	font-weight: bold;
 	padding: 5px 20px;
 	text-decoration: none;
+}
+#yearDropDown {
+    height: 25px;
+    margin-left: 45%;
+    margin-right: 45%;
+    color:black;
+    font-size: large;
+    margin-top: 2px;
+
+  
+    
 }
 
 @media only screen and (max-width: 414px) {
