@@ -772,8 +772,10 @@ function saveNote() {
 
 			// If btnDay1-btnDay31 is clicked this activates
 			dayButton.addEventListener("click", function () {
-				// Show the selected date at the top after clicking button NOT STARTED::::::::::
-
+				// Show the selected date at the top after clicking button
+				// Extract the date number from dayButton id
+				let date = dayButton.id.match(/\d+/)[0];
+				displaySelectedDatePlan(new Date(selectedYear, returnMonth(selectedMonth), date));
 				// If a note has been saved this displays it
 				if (dayButton.style.color == "yellow") {
 					noteText.placeholder = dayArray[dayButton.id];
