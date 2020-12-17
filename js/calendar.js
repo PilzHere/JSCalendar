@@ -131,14 +131,39 @@ function initWebsite() {
 		.getElementById("currentMonthLabelAndButtons")
 		.appendChild(btnPreviousMonth);
 
+		const selectedMonthAndYearDiv = document.createElement("div");
+		selectedMonthAndYearDiv.tagName = "selectedMonthAndYearDiv";
+		selectedMonthAndYearDiv.id = "selectedMonthAndYearDiv";
+	document.getElementById("currentMonthLabelAndButtons").appendChild(selectedMonthAndYearDiv);
+
 	// selectedMonthLabel element
 	const selectedMonthLabel = document.createElement("label");
 	selectedMonthLabel.tagName = "selectedMonthLabel";
 	selectedMonthLabel.id = "selectedMonthLabel";
 	selectedMonthLabel.innerHTML = "June 2021";
 	document
-		.getElementById("currentMonthLabelAndButtons")
+		.getElementById("selectedMonthAndYearDiv")
 		.appendChild(selectedMonthLabel);
+
+			// year drop down
+	const yearDropDown = document.createElement("select");
+	yearDropDown.tagName = "yearDropDown";
+	yearDropDown.id = "yearDropDown";
+	//yearDropDown.innerHTML = "Year";
+	yearDropDown.addEventListener("change", function () {
+		yearDropDownEvent();
+	});
+	document.getElementById("selectedMonthAndYearDiv").appendChild(yearDropDown);
+	(min = 1985),
+		(max = 2041),
+		(select = document.getElementById("yearDropDown"));
+	for (var i = min; i <= max; i++) {
+		var opt = document.createElement("option");
+		opt.value = i;
+		opt.innerHTML = i;
+		yearDropDown.appendChild(opt);
+	}
+	select.value = new Date().getFullYear();
 
 	// btnNextMonth element
 	const btnNextMonth = document.createElement("button");
@@ -153,25 +178,7 @@ function initWebsite() {
 		.getElementById("currentMonthLabelAndButtons")
 		.appendChild(btnNextMonth);
 
-	// year drop down
-	const yearDropDown = document.createElement("select");
-	yearDropDown.tagName = "yearDropDown";
-	yearDropDown.id = "yearDropDown";
-	//yearDropDown.innerHTML = "Year";
-	yearDropDown.addEventListener("change", function () {
-		yearDropDownEvent();
-	});
-	document.getElementById("monthWrapper").appendChild(yearDropDown);
-	(min = 1985),
-		(max = 2041),
-		(select = document.getElementById("yearDropDown"));
-	for (var i = min; i <= max; i++) {
-		var opt = document.createElement("option");
-		opt.value = i;
-		opt.innerHTML = i;
-		yearDropDown.appendChild(opt);
-	}
-	select.value = new Date().getFullYear();
+
 
 	// divDaysLabel element
 	const divDaysLabel = document.createElement("grid-container");
@@ -215,7 +222,7 @@ function initWebsite() {
 
 	// Update text of selectedMonthLabel.
 	selectedMonthLabel.innerHTML =
-		MONTHNAMES[today.getMonth()] + " " + today.getFullYear();
+		MONTHNAMES[today.getMonth()];
 
 	console.log("this month: " + currentMonth); // test
 
@@ -259,10 +266,10 @@ function previousMonthEvent() {
 
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
-		MONTHNAMES[currentMonth - 1] + " " + currentYear;
+		MONTHNAMES[currentMonth - 1];
 
 	//console.log("this month: " + currentMonth);
-
+	select.value = currentYear;
 	debugLogCurrentViewedMonthInfo();
 }
 
@@ -292,10 +299,10 @@ function nextMonthEvent() {
 
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
-		MONTHNAMES[currentMonth - 1] + " " + currentYear;
+		MONTHNAMES[currentMonth - 1];
 
 	//console.log("this month: " + currentMonth); // test
-
+	select.value = currentYear;
 	debugLogCurrentViewedMonthInfo();
 }
 
@@ -842,7 +849,7 @@ function yearDropDownEvent() {
 
 	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 	selectedMonthLabel.innerHTML =
-		MONTHNAMES[currentMonth - 1] + " " + currentYear;
+		MONTHNAMES[currentMonth - 1];
 
 	//console.log("this month: " + currentMonth); // test
 
