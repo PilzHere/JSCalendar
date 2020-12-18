@@ -720,11 +720,8 @@ function saveNote() {
     let noteText = document.getElementById("selectedDateTextArea");
 
     // Splits year and month so you can use the separately
-    let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
-    let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
-    let selectedYear = monthYearSplit[1];
-    let selectedMonth = monthYearSplit[0];
-
+    let selectedYear = document.getElementById("yearDropDown").value;
+    let selectedMonth = document.getElementById("selectedMonthLabel").textContent;
     for (let dayNum = 1; dayNum < 32; dayNum++) {
         let currentYMD =
             selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
@@ -783,6 +780,7 @@ function saveNote() {
                 // Show the selected date at the top after clicking button
                 // Extract the date number from dayButton id
                 let date = dayButton.id.match(/\d+/)[0];
+                console.log();
                 displaySelectedDatePlan(
                     new Date(selectedYear, returnMonth(selectedMonth), date)
                 );
