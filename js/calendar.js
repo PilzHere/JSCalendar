@@ -153,11 +153,10 @@ function initWebsite() {
 		.getElementById("currentMonthLabelAndButtons")
         .appendChild(btnNextMonth);
     
-        // year drop down
+    // year drop down element
     const yearDropDown = document.createElement("select");
     yearDropDown.tagName = "yearDropDown";
     yearDropDown.id = "yearDropDown";
-    //yearDropDown.innerHTML = "Year"; 
     yearDropDown.addEventListener("change", function() {
         yearDropDownEvent();
     });
@@ -165,13 +164,35 @@ function initWebsite() {
         min = 1985,
         max = 2041,
         select = document.getElementById('yearDropDown');
-    for (var i = min; i<=max; i++){
+    for (let i = min; i<=max; i++){
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = i;
         yearDropDown.appendChild(opt);
     }
     select.value = new Date().getFullYear();
+
+    // Month drop down element
+    const monthDropDown = document.createElement("select");
+    monthDropDown.tagName = "monthDropDown";
+    monthDropDown.id = "monthDropDown";
+    monthDropDown.addEventListener("change", function() {
+		monthDropDownEvent();    
+    });
+    document.getElementById("monthWrapper").appendChild(monthDropDown);
+        selected = document.getElementById('monthDropDown');
+    for (let i = 0; i<MONTHNAMES.length; i++){
+        var opt = document.createElement('option');
+        opt.value = MONTHNAMES[i];
+        opt.innerHTML = MONTHNAMES[i];
+        monthDropDown.appendChild(opt);
+    }
+	let selectValue = new Date().getMonth();
+	selected.value = MONTHNAMES[new Date().getMonth()];
+	
+	
+
+
 
 	// divDaysLabel element
 	const divDaysLabel = document.createElement("grid-container");
@@ -832,8 +853,28 @@ saveNote();
 
 // year Drop down selection function
 function yearDropDownEvent() {
-    var x = document.getElementById("yearDropDown").value;
-    currentYear = x;
+    let dropDownYear = document.getElementById("yearDropDown").value;
+    currentYear = dropDownYear;
+    today.setMonth(currentMonth);
+    today.setFullYear(currentYear);
+
+    removeDisabledButtons();
+    featureCalendarDisplay();
+
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+    selectedMonthLabel.innerHTML =
+        MONTHNAMES[currentMonth - 1] + " " + currentYear;
+
+    //console.log("this month: " + currentMonth); // test
+
+    debugLogCurrentViewedMonthInfo();
+    displayRedWeekend()
+}
+// year Drop down selection function
+function monthDropDownEvent() {
+	var dropDownMonth = document.getElementById("monthDropDown").value;
+	
+	currentMonth = MONTHNAMES.indexOf(dropDownMonth) + 1;
     today.setMonth(currentMonth);
     today.setFullYear(currentYear);
 
