@@ -195,7 +195,7 @@ function initWebsite() {
     daysLabel.tagName = "daysLabel";
     daysLabel.id = "daysLabel";
     daysLabel.innerHTML =
-        "<span>#</span> <span>Mon</span> <span>Tue</span> <span>Wed</span <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span>";
+        "<span>#</span> <span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span>";
     document.getElementById("divDaysLabel").appendChild(daysLabel);
 
     // weekAndMonthGrid element
