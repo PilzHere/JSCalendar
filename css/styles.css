@@ -179,6 +179,18 @@ button:disabled {
     font-weight: 600;
 }
 
+#monthDropDown {
+    height: 33px;
+    width: 200px;
+    color: #e8e8e8;
+    font-size: 20pt;
+    background-color: #30475e;
+    border: 1px solid #e8e8e8;
+    font-family: "MyWebFont";
+	font-weight: 600;
+	margin-right: 5px;
+}
+
 @media only screen and (max-width: 414px) {
     #mainWrapper {
         margin: 0;
