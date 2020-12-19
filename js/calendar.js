@@ -253,9 +253,10 @@ function initWebsite() {
     previousMonthEvent();
     // Temp end.
 
-    displayRedWeekend();
+    
     displayWeekNumbers();
     currentDateDisplay();
+    displayRedWeekend();
 }
 
 /**
@@ -287,7 +288,7 @@ function previousMonthEvent() {
     featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    selected.value=MONTHNAMES[currentMonth - 1];
 
     //console.log("this month: " + currentMonth);
     select.value = currentYear;
@@ -319,7 +320,7 @@ function nextMonthEvent() {
     featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    selected.value=MONTHNAMES[currentMonth - 1];
 
     //console.log("this month: " + currentMonth); // test
     select.value = currentYear;
@@ -886,8 +887,7 @@ function monthDropDownEvent() {
     featureCalendarDisplay();
     
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML =
-        MONTHNAMES[currentMonth - 1] + " " + currentYear;
+    
     //console.log("this month: " + currentMonth); // test
     debugLogCurrentViewedMonthInfo();
     displayRedWeekend()
