@@ -144,7 +144,7 @@ function initWebsite() {
     const selectedMonthLabel = document.createElement("label");
     selectedMonthLabel.tagName = "selectedMonthLabel";
     selectedMonthLabel.id = "selectedMonthLabel";
-    selectedMonthLabel.innerHTML = "June 2021";
+    selectedMonthLabel.innerHTML = "";
     document
         .getElementById("selectedMonthAndYearDiv")
         .appendChild(selectedMonthLabel);
@@ -244,7 +244,7 @@ function initWebsite() {
     document.getElementById("mainWrapper").appendChild(monthButtonsWrapper);
 
     // Update text of selectedMonthLabel.
-    selectedMonthLabel.innerHTML = MONTHNAMES[today.getMonth()];
+    //selectedMonthLabel.innerHTML = MONTHNAMES[today.getMonth()];
 
     console.log("this month: " + currentMonth); // test
 
@@ -500,10 +500,9 @@ function getButtonOfMonth(dayNumber) {
 
 function displayRedWeekend() {
     // Gets the month and year from ID="selectedMonthLabel"
-    let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
-    let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
+    let dropDownMonth = document.getElementById("monthDropDown").value;    
     let selectedYear = currentYear;
-    let selectedMonth = monthYearSplit[0];
+    let selectedMonth = MONTHNAMES.indexOf(dropDownMonth)+1;
 
     // Updates the month and year everytime month changes
     document
@@ -869,7 +868,7 @@ function yearDropDownEvent() {
     featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    
 
     //console.log("this month: " + currentMonth); // test
 

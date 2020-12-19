@@ -188,7 +188,7 @@ button:disabled {
     border: 1px solid #e8e8e8;
     font-family: "MyWebFont";
 	font-weight: 600;
-	margin-right: 5px;
+	margin-right: 8px;
 }
 
 @media only screen and (max-width: 414px) {
