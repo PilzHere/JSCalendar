@@ -140,14 +140,14 @@ function initWebsite() {
         .getElementById("currentMonthLabelAndButtons")
         .appendChild(selectedMonthAndYearDiv);
 
-    // selectedMonthLabel element
+    /*/ selectedMonthLabel element
     const selectedMonthLabel = document.createElement("label");
     selectedMonthLabel.tagName = "selectedMonthLabel";
     selectedMonthLabel.id = "selectedMonthLabel";
     selectedMonthLabel.innerHTML = "";
     document
         .getElementById("selectedMonthAndYearDiv")
-        .appendChild(selectedMonthLabel);
+        .appendChild(selectedMonthLabel);*/
     
     // Month drop down element
     const monthDropDown = document.createElement("select");
@@ -165,11 +165,12 @@ function initWebsite() {
         opt.innerHTML = MONTHNAMES[i];
         monthDropDown.appendChild(opt);
     }
+    //fix the initial value of month drop down
     let selectValue = new Date().getMonth();
     selected.value = MONTHNAMES[new Date().getMonth()];    
         
 
-    // year drop down
+    // year drop down element 
     const yearDropDown = document.createElement("select");
     yearDropDown.tagName = "yearDropDown";
     yearDropDown.id = "yearDropDown";
@@ -188,6 +189,7 @@ function initWebsite() {
         opt.innerHTML = i;
         yearDropDown.appendChild(opt);
     }
+    //fix the initial value of year drop down
     select.value = new Date().getFullYear();
 
     // btnNextMonth element
@@ -499,19 +501,10 @@ function getButtonOfMonth(dayNumber) {
 }
 
 function displayRedWeekend() {
-    /*/ Gets the month and year from ID="selectedMonthLabel"
-    let dropDownMonth = document.getElementById("monthDropDown").value;    
-    let selectedYear = currentYear;
-    let selectedMonth = MONTHNAMES.indexOf(dropDownMonth);*/
-    
-    let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
-    let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
-    let selectedYear = currentYear;
-    let selectedMonth = monthYearSplit[0];
-    console.log(selectedYear);
-    console.log(selectedMonth);
-
-    // Updates the month and year everytime month changes
+    // Gets the month and year from ID="monthDropDown"
+    let selectedMonth = document.getElementById("monthDropDown").value;    
+    let selectedYear = currentYear;    
+   
     document
         .getElementById("btnNextMonth")
         .addEventListener("click", displayRedWeekend);
@@ -875,13 +868,12 @@ function yearDropDownEvent() {
     removeDisabledButtons();
     featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));    
+
+    //console.log("this month: " + currentMonth); // test    
     
-
-    //console.log("this month: " + currentMonth); // test
-
+    displayRedWeekend();
     debugLogCurrentViewedMonthInfo();
-    //displayRedWeekend();
 }
 // month drop down selection function
 function monthDropDownEvent() {
@@ -896,7 +888,8 @@ function monthDropDownEvent() {
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
     
     //console.log("this month: " + currentMonth); // test
+    
+    displayRedWeekend()
     debugLogCurrentViewedMonthInfo();
-    //displayRedWeekend()
 }
 
