@@ -216,5 +216,10 @@ button:disabled {
         font-size: 16pt;
         height: 27px;
         width: 75px;
-    }
+	}
+	#monthDropDown {
+		height: 27px;
+		width: 120px;
+		font-size: 16pt;
+	}
 }
