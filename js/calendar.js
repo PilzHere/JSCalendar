@@ -499,10 +499,17 @@ function getButtonOfMonth(dayNumber) {
 }
 
 function displayRedWeekend() {
-    // Gets the month and year from ID="selectedMonthLabel"
+    /*/ Gets the month and year from ID="selectedMonthLabel"
     let dropDownMonth = document.getElementById("monthDropDown").value;    
     let selectedYear = currentYear;
-    let selectedMonth = MONTHNAMES.indexOf(dropDownMonth)+1;
+    let selectedMonth = MONTHNAMES.indexOf(dropDownMonth);*/
+    
+    let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
+    let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
+    let selectedYear = currentYear;
+    let selectedMonth = monthYearSplit[0];
+    console.log(selectedYear);
+    console.log(selectedMonth);
 
     // Updates the month and year everytime month changes
     document
@@ -553,6 +560,7 @@ function displayRedWeekend() {
     }
     for (day = 0; day < 32; day++) {
         var d = new Date(selectedYear, monthNum, day);
+        console.log(d);
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
@@ -740,7 +748,7 @@ function saveNote() {
 
     // Splits year and month so you can use the separately
     let selectedYear = document.getElementById("yearDropDown").value;
-    let selectedMonth = document.getElementById("selectedMonthLabel").textContent;
+    let selectedMonth = document.getElementById("monthDropDown").value;
     for (let dayNum = 1; dayNum < 32; dayNum++) {
         let currentYMD =
             selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
@@ -873,7 +881,7 @@ function yearDropDownEvent() {
     //console.log("this month: " + currentMonth); // test
 
     debugLogCurrentViewedMonthInfo();
-    displayRedWeekend();
+    //displayRedWeekend();
 }
 // month drop down selection function
 function monthDropDownEvent() {
@@ -889,6 +897,6 @@ function monthDropDownEvent() {
     
     //console.log("this month: " + currentMonth); // test
     debugLogCurrentViewedMonthInfo();
-    displayRedWeekend()
+    //displayRedWeekend()
 }
 
