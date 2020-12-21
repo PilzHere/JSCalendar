@@ -11,6 +11,7 @@ const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
+var saveNoteColor= "#6363d4";
 
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -747,7 +748,7 @@ function saveNote() {
             selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
         if (storeDateNotes[currentYMD]) {
             let dayButton = document.getElementById("btnDay" + dayNum);
-            dayButton.style.color = "yellow";
+            dayButton.style.color = saveNoteColor;
         }
     }
     // For loop for creating an array with all the days connected to the notes
@@ -770,7 +771,7 @@ function saveNote() {
             if (years[selectedYear]) {
                 if (monthArray[selectedMonth]) {
                     if (dayArray[dayButton.id] != "Add a note:") {
-                        dayButton.style.color = "yellow";
+                        dayButton.style.color = saveNoteColor;
                     }
                 }
             }
@@ -779,7 +780,7 @@ function saveNote() {
             noteText.value = "";
             // This removes a note that has been made if button is double clicked
             dayButton.addEventListener("dblclick", function () {
-                if (dayButton.style.color == "yellow") {
+                if (dayButton.style.color == saveNoteColor) {
                     getNum = dayButton.id.replace(/^\D+/g, "");
                     let currentYMD =
                         selectedYear +
@@ -805,7 +806,7 @@ function saveNote() {
                     new Date(selectedYear, returnMonth(selectedMonth), date)
                 );
                 // If a note has been saved this displays it
-                if (dayButton.style.color == "yellow") {
+                if (dayButton.style.color == saveNoteColor) {
                     noteText.placeholder = dayArray[dayButton.id];
                 }
                 // dayButton.id = btnDay
@@ -814,12 +815,12 @@ function saveNote() {
                 // Clicking button after writing something saves it
                 if (
                     noteText.value.length != 0 &&
-                    dayButton.style.color != "yellow"
+                    dayButton.style.color != saveNoteColor
                 ) {
                     // Saves note to array. Write saved then resets after 1 second
                     dayArray[dayButton.id] = noteText.value;
                     // Change color of button that has saved note
-                    dayButton.style.color = "yellow";
+                    dayButton.style.color = saveNoteColor;
                     noteText.placeholder = "Note saved";
                     setTimeout(function () {
                         noteText.value = "";
@@ -841,7 +842,7 @@ function saveNote() {
                 }
 
                 // If a button has no note the default placeholder is shown
-                if (dayButton.style.color != "yellow") {
+                if (dayButton.style.color != saveNoteColor) {
                     noteText.placeholder =
                         "Display notes for the selected date here...";
                 }
@@ -871,9 +872,11 @@ function yearDropDownEvent() {
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));    
 
     //console.log("this month: " + currentMonth); // test    
-    
+
     displayRedWeekend();
     debugLogCurrentViewedMonthInfo();
+    updateWeekNumbers();
+    saveNote();
 }
 // month drop down selection function
 function monthDropDownEvent() {
@@ -891,5 +894,7 @@ function monthDropDownEvent() {
     
     displayRedWeekend()
     debugLogCurrentViewedMonthInfo();
+    updateWeekNumbers();
+    saveNote();
 }
 
