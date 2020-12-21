@@ -11,6 +11,7 @@ const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
+var saveNoteColor= "#6363d4";
 
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -140,20 +141,40 @@ function initWebsite() {
         .getElementById("currentMonthLabelAndButtons")
         .appendChild(selectedMonthAndYearDiv);
 
-    // selectedMonthLabel element
+    /*/ selectedMonthLabel element
     const selectedMonthLabel = document.createElement("label");
     selectedMonthLabel.tagName = "selectedMonthLabel";
     selectedMonthLabel.id = "selectedMonthLabel";
-    selectedMonthLabel.innerHTML = "June 2021";
+    selectedMonthLabel.innerHTML = "";
     document
         .getElementById("selectedMonthAndYearDiv")
-        .appendChild(selectedMonthLabel);
+        .appendChild(selectedMonthLabel);*/
+    
+    // Month drop down element
+    const monthDropDown = document.createElement("select");
+    monthDropDown.tagName = "monthDropDown";
+    monthDropDown.id = "monthDropDown";
+    monthDropDown.addEventListener("change", function() {
+        monthDropDownEvent();    
+    });
+    document
+        .getElementById("selectedMonthAndYearDiv").appendChild(monthDropDown);
+        selected = document.getElementById('monthDropDown');
+    for (let i = 0; i<MONTHNAMES.length; i++){
+        var opt = document.createElement('option');
+        opt.value = MONTHNAMES[i];
+        opt.innerHTML = MONTHNAMES[i];
+        monthDropDown.appendChild(opt);
+    }
+    //fix the initial value of month drop down
+    let selectValue = new Date().getMonth();
+    selected.value = MONTHNAMES[new Date().getMonth()];    
+        
 
-    // year drop down
+    // year drop down element 
     const yearDropDown = document.createElement("select");
     yearDropDown.tagName = "yearDropDown";
     yearDropDown.id = "yearDropDown";
-    //yearDropDown.innerHTML = "Year";
     yearDropDown.addEventListener("change", function () {
         yearDropDownEvent();
     });
@@ -169,6 +190,7 @@ function initWebsite() {
         opt.innerHTML = i;
         yearDropDown.appendChild(opt);
     }
+    //fix the initial value of year drop down
     select.value = new Date().getFullYear();
 
     // btnNextMonth element
@@ -225,7 +247,7 @@ function initWebsite() {
     document.getElementById("mainWrapper").appendChild(monthButtonsWrapper);
 
     // Update text of selectedMonthLabel.
-    selectedMonthLabel.innerHTML = MONTHNAMES[today.getMonth()];
+    //selectedMonthLabel.innerHTML = MONTHNAMES[today.getMonth()];
 
     console.log("this month: " + currentMonth); // test
 
@@ -234,9 +256,10 @@ function initWebsite() {
     previousMonthEvent();
     // Temp end.
 
-    displayRedWeekend();
+    
     displayWeekNumbers();
     currentDateDisplay();
+    displayRedWeekend();
 }
 
 /**
@@ -268,7 +291,7 @@ function previousMonthEvent() {
     featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    selected.value=MONTHNAMES[currentMonth - 1];
 
     //console.log("this month: " + currentMonth);
     select.value = currentYear;
@@ -300,7 +323,7 @@ function nextMonthEvent() {
     featureCalendarDisplay();
 
     updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    selected.value=MONTHNAMES[currentMonth - 1];
 
     //console.log("this month: " + currentMonth); // test
     select.value = currentYear;
@@ -479,13 +502,10 @@ function getButtonOfMonth(dayNumber) {
 }
 
 function displayRedWeekend() {
-    // Gets the month and year from ID="selectedMonthLabel"
-    let selectedMonthAndYear = document.getElementById("selectedMonthLabel");
-    let monthYearSplit = selectedMonthAndYear.textContent.split(" ");
-    let selectedYear = currentYear;
-    let selectedMonth = monthYearSplit[0];
-
-    // Updates the month and year everytime month changes
+    // Gets the month and year from ID="monthDropDown"
+    let selectedMonth = document.getElementById("monthDropDown").value;    
+    let selectedYear = currentYear;    
+   
     document
         .getElementById("btnNextMonth")
         .addEventListener("click", displayRedWeekend);
@@ -534,6 +554,7 @@ function displayRedWeekend() {
     }
     for (day = 0; day < 32; day++) {
         var d = new Date(selectedYear, monthNum, day);
+        console.log(d);
         if (d.getDay() == 6 || d.getDay() == 0) {
             try {
                 var buttonId = "btnDay" + day;
@@ -721,13 +742,13 @@ function saveNote() {
 
     // Splits year and month so you can use the separately
     let selectedYear = document.getElementById("yearDropDown").value;
-    let selectedMonth = document.getElementById("selectedMonthLabel").textContent;
+    let selectedMonth = document.getElementById("monthDropDown").value;
     for (let dayNum = 1; dayNum < 32; dayNum++) {
         let currentYMD =
             selectedYear + ":" + returnMonth(selectedMonth) + ":" + dayNum;
         if (storeDateNotes[currentYMD]) {
             let dayButton = document.getElementById("btnDay" + dayNum);
-            dayButton.style.color = "yellow";
+            dayButton.style.color = saveNoteColor;
         }
     }
     // For loop for creating an array with all the days connected to the notes
@@ -750,7 +771,7 @@ function saveNote() {
             if (years[selectedYear]) {
                 if (monthArray[selectedMonth]) {
                     if (dayArray[dayButton.id] != "Add a note:") {
-                        dayButton.style.color = "yellow";
+                        dayButton.style.color = saveNoteColor;
                     }
                 }
             }
@@ -759,7 +780,7 @@ function saveNote() {
             noteText.value = "";
             // This removes a note that has been made if button is double clicked
             dayButton.addEventListener("dblclick", function () {
-                if (dayButton.style.color == "yellow") {
+                if (dayButton.style.color == saveNoteColor) {
                     getNum = dayButton.id.replace(/^\D+/g, "");
                     let currentYMD =
                         selectedYear +
@@ -785,7 +806,7 @@ function saveNote() {
                     new Date(selectedYear, returnMonth(selectedMonth), date)
                 );
                 // If a note has been saved this displays it
-                if (dayButton.style.color == "yellow") {
+                if (dayButton.style.color == saveNoteColor) {
                     noteText.placeholder = dayArray[dayButton.id];
                 }
                 // dayButton.id = btnDay
@@ -794,12 +815,12 @@ function saveNote() {
                 // Clicking button after writing something saves it
                 if (
                     noteText.value.length != 0 &&
-                    dayButton.style.color != "yellow"
+                    dayButton.style.color != saveNoteColor
                 ) {
                     // Saves note to array. Write saved then resets after 1 second
                     dayArray[dayButton.id] = noteText.value;
                     // Change color of button that has saved note
-                    dayButton.style.color = "yellow";
+                    dayButton.style.color = saveNoteColor;
                     noteText.placeholder = "Note saved";
                     setTimeout(function () {
                         noteText.value = "";
@@ -821,7 +842,7 @@ function saveNote() {
                 }
 
                 // If a button has no note the default placeholder is shown
-                if (dayButton.style.color != "yellow") {
+                if (dayButton.style.color != saveNoteColor) {
                     noteText.placeholder =
                         "Display notes for the selected date here...";
                 }
@@ -848,11 +869,32 @@ function yearDropDownEvent() {
     removeDisabledButtons();
     featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selectedMonthLabel.innerHTML = MONTHNAMES[currentMonth - 1];
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));    
 
-    //console.log("this month: " + currentMonth); // test
+    //console.log("this month: " + currentMonth); // test    
 
-    debugLogCurrentViewedMonthInfo();
     displayRedWeekend();
+    debugLogCurrentViewedMonthInfo();
+    updateWeekNumbers();
+    saveNote();
 }
+// month drop down selection function
+function monthDropDownEvent() {
+    var dropDownMonth = document.getElementById("monthDropDown").value;
+    currentMonth = MONTHNAMES.indexOf(dropDownMonth) + 1;
+    today.setMonth(currentMonth);
+    today.setFullYear(currentYear);
+
+    removeDisabledButtons();
+    featureCalendarDisplay();
+    
+    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+    
+    //console.log("this month: " + currentMonth); // test
+    
+    displayRedWeekend()
+    debugLogCurrentViewedMonthInfo();
+    updateWeekNumbers();
+    saveNote();
+}
+
