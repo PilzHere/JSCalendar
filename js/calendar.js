@@ -11,7 +11,7 @@ const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-
 let oldMonthAmountOfDays = 0;
 
 var globalBtnDay;
-var saveNoteColor = "#6363d4";
+var saveNoteColor = "rgb(99, 99, 212)";
 
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -694,7 +694,6 @@ function saveNote() {
                     dayButton.style.color = "black";
                 }
             });
-
             // If btnDay1-btnDay31 is clicked this activates
             dayButton.addEventListener("click", function () {
                 // Show the selected date at the top after clicking button
@@ -720,6 +719,7 @@ function saveNote() {
                     // Change color of button that has saved note
                     dayButton.style.color = saveNoteColor;
                     noteText.placeholder = "Note saved";
+                    console.log((dayButton.style.color));
                     setTimeout(function () {
                         noteText.value = "";
                     }, 1000);
