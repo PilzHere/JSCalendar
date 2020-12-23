@@ -10,7 +10,6 @@ let currentYear = today.getFullYear();
 const maximumAmountOfButtons = [7 * 6]; // Maximum amount of cells in the month-grid.
 let oldMonthAmountOfDays = 0;
 
-var globalBtnDay;
 var saveNoteColor = "rgb(99, 99, 212)";
 
 // Sunday is twice for getting day-names correctly...
@@ -30,31 +29,9 @@ const MONTHNAMES = [
     "December",
 ];
 
-/**
- * Day contains it's own date and the notes beloning to it.
- * @param {*} dayNumber
- * @param {*} monthNumber
- * @param {*} yearNumber
- * @param {*} notes
- */
-function Day(dayNumber, monthNumber, yearNumber, notes) {
-    this.dayNumber = dayNumber;
-    this.monthNumber = monthNumber;
-    this.yearNumber = yearNumber;
-    this.notes = notes;
-
-    Day.updateNotes = function (newNotes) {
-        this.notes = newNotes;
-    };
-}
-
 // Buttons displaying the current month.
 let currentMonthButtons = [maximumAmountOfButtons];
 
-// Dates the user have registered.
-let registeredDays = [];
-let newDay = new Day(20, 11, 2020, "This is a note."); // Test
-registeredDays.push(newDay);
 
 /**
  * Initializes the whole javascript web content.
@@ -145,7 +122,6 @@ function initWebsite() {
         monthDropDown.appendChild(opt);
     }
     //fix the initial value of month drop down
-    let selectValue = new Date().getMonth();
     selected.value = MONTHNAMES[new Date().getMonth()];
 
     // year drop down element
@@ -357,8 +333,6 @@ function featureCalendarDisplay() {
             break;
     }
 }
-
-let selectedDay;
 
 /**
  * Updates the grid displaying the days of the month.
@@ -650,19 +624,12 @@ function saveNote() {
             dayButton.style.color = saveNoteColor;
         }
     }
-    // For loop for creating an array with all the days connected to the notes
-    for (let button = 1; button < 32; button++) {
-        // Easier to write
-        let stringBtn = "btnDay" + button;
-        // ARRAY with all the buttondays btnDay1, btnDay2 etc....
-    }
 
     try {
         for (let button = 1; button < 32; button++) {
             dayArray["btnDay" + button];
             // ID of buttons
             let dayButton = document.getElementById("btnDay" + button);
-            // dfpsdejfpijdp
             if (selectedMonth != monthArray[selectedMonth]) {
                 monthArray[selectedMonth] = dayArray;
             }
