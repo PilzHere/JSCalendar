@@ -15,18 +15,18 @@ var saveNoteColor = "rgb(99, 99, 212)";
 // Sunday is twice for getting day-names correctly...
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHNAMES = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
 ];
 
 // Buttons displaying the current month.
@@ -215,123 +215,121 @@ function initWebsite() {
  * @param {*} year
  */
 let getDaysInMonth = function (month, year) {
-    return new Date(year, month, 0).getDate();
+	return new Date(year, month, 0).getDate();
 };
 
 /**
  * Switches the current month to the previous.
  */
 function previousMonthEvent() {
-    currentMonth--;
+	currentMonth--;
 
-    if (currentMonth == 0) {
-        currentYear--;
-        currentMonth = 12;
-    }
+	if (currentMonth == 0) {
+		currentYear--;
+		currentMonth = 12;
+	}
 
-    today.setMonth(currentMonth);
-    today.setFullYear(currentYear);
+	today.setMonth(currentMonth);
+	today.setFullYear(currentYear);
 
-    removeDisabledButtons();
-    featureCalendarDisplay();
+	removeDisabledButtons();
+	featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selected.value = MONTHNAMES[currentMonth - 1];
+	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+	selected.value = MONTHNAMES[currentMonth - 1];
 
-    select.value = currentYear;
-
+	select.value = currentYear;
 }
 
 /**
  * Switches the current month to the next.
  */
 function nextMonthEvent() {
-    currentMonth++;
+	currentMonth++;
 
-    if (currentMonth == 13) {
-        currentYear++;
-        currentMonth = 1;
-    }
+	if (currentMonth == 13) {
+		currentYear++;
+		currentMonth = 1;
+	}
 
-    today.setMonth(currentMonth);
-    today.setFullYear(currentYear);
+	today.setMonth(currentMonth);
+	today.setFullYear(currentYear);
 
-    removeDisabledButtons();
-    featureCalendarDisplay();
+	removeDisabledButtons();
+	featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
-    selected.value = MONTHNAMES[currentMonth - 1];
+	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+	selected.value = MONTHNAMES[currentMonth - 1];
 
-    select.value = currentYear;
-
+	select.value = currentYear;
 }
 
 /**
  * Adds disabled buttons.
  */
 function addDisabledButtonToMonthGrid() {
-    const btnDay = document.createElement("button");
-    btnDay.tagName = "btnDayNone";
-    btnDay.id = "btnDayNone";
-    btnDay.className = "btnDayNone";
-    btnDay.innerHTML = "";
-    btnDay.disabled = true;
+	const btnDay = document.createElement("button");
+	btnDay.tagName = "btnDayNone";
+	btnDay.id = "btnDayNone";
+	btnDay.className = "btnDayNone";
+	btnDay.innerHTML = "";
+	btnDay.disabled = true;
 
-    currentMonthButtons.unshift(btnDay);
+	currentMonthButtons.unshift(btnDay);
 
-    document.getElementById("monthGrid").appendChild(btnDay);
+	document.getElementById("monthGrid").appendChild(btnDay);
 }
 
 /**
  * Removes disabled buttons.
  */
 function removeDisabledButtons() {
-    for (let i = 0; i < 7; i++) {
-        if (document.getElementById("btnDayNone") != null) {
-            document.getElementById("btnDayNone").remove();
-        }
-    }
+	for (let i = 0; i < 7; i++) {
+		if (document.getElementById("btnDayNone") != null) {
+			document.getElementById("btnDayNone").remove();
+		}
+	}
 }
 
 /**
  * Displays the buttons like a real calendar.
  */
 function featureCalendarDisplay() {
-    let firstDay = new Date(currentYear, currentMonth - 1, 1);
-    let firstDayName = WEEKDAYS[firstDay.getDay()];
+	let firstDay = new Date(currentYear, currentMonth - 1, 1);
+	let firstDayName = WEEKDAYS[firstDay.getDay()];
 
-    switch (firstDayName) {
-        case "Sun":
-            for (i = WEEKDAYS.indexOf("Sat"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-        case "Sat":
-            for (i = WEEKDAYS.indexOf("Fri"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-        case "Fri":
-            for (i = WEEKDAYS.indexOf("Thu"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-        case "Thu":
-            for (i = WEEKDAYS.indexOf("Wed"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-        case "Wed":
-            for (i = WEEKDAYS.indexOf("Tue"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-        case "Tue":
-            for (i = WEEKDAYS.indexOf("Mon"); i > 0; i--) {
-                addDisabledButtonToMonthGrid();
-            }
-            break;
-    }
+	switch (firstDayName) {
+		case "Sun":
+			for (i = WEEKDAYS.indexOf("Sat"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Sat":
+			for (i = WEEKDAYS.indexOf("Fri"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Fri":
+			for (i = WEEKDAYS.indexOf("Thu"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Thu":
+			for (i = WEEKDAYS.indexOf("Wed"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Wed":
+			for (i = WEEKDAYS.indexOf("Tue"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+		case "Tue":
+			for (i = WEEKDAYS.indexOf("Mon"); i > 0; i--) {
+				addDisabledButtonToMonthGrid();
+			}
+			break;
+	}
 }
 
 /**
@@ -339,53 +337,52 @@ function featureCalendarDisplay() {
  * @param {*} amountOfDaysInMonth
  */
 function updateMonthGrid(amountOfDaysInMonth) {
-    if (document.getElementById("monthGrid").hasChildNodes) {
-        for (
-            let currentDay = 1;
-            currentDay < oldMonthAmountOfDays + 1;
-            currentDay++
-        ) {
-            if (document.getElementById("btnDay" + currentDay) != null) {
-                document.getElementById("btnDay" + currentDay).remove();
+	if (document.getElementById("monthGrid").hasChildNodes) {
+		for (
+			let currentDay = 1;
+			currentDay < oldMonthAmountOfDays + 1;
+			currentDay++
+		) {
+			if (document.getElementById("btnDay" + currentDay) != null) {
+				document.getElementById("btnDay" + currentDay).remove();
 
-                currentMonthButtons.length = 0; // Clear the array.
-                currentMonthButtons.length = maximumAmountOfButtons;
-            }
-        }
-    }
+				currentMonthButtons.length = 0; // Clear the array.
+				currentMonthButtons.length = maximumAmountOfButtons;
+			}
+		}
+	}
 
-    // Maybe no needed...
-    if (
-        amountOfDaysInMonth < 28
-            ? (amountOfDaysInMonth = 28)
-            : amountOfDaysInMonth
-    );
-    if (
-        amountOfDaysInMonth > 31
-            ? (amountOfDaysInMonth = 31)
-            : amountOfDaysInMonth
-    );
-    // Maybe end.
+	// Making sure days stay in normal range.
+	if (
+		amountOfDaysInMonth < 28
+			? (amountOfDaysInMonth = 28)
+			: amountOfDaysInMonth
+	);
+	if (
+		amountOfDaysInMonth > 31
+			? (amountOfDaysInMonth = 31)
+			: amountOfDaysInMonth
+	);
 
-    for (
-        let currentDay = 1;
-        currentDay < amountOfDaysInMonth + 1;
-        currentDay++
-    ) {
-        const btnDay = document.createElement("button");
-        btnDay.tagName = "btnDay" + currentDay;
-        btnDay.id = "btnDay" + currentDay;
-        btnDay.className = "btnDay";
-        btnDay.innerHTML = currentDay;
+	for (
+		let currentDay = 1;
+		currentDay < amountOfDaysInMonth + 1;
+		currentDay++
+	) {
+		const btnDay = document.createElement("button");
+		btnDay.tagName = "btnDay" + currentDay;
+		btnDay.id = "btnDay" + currentDay;
+		btnDay.className = "btnDay";
+		btnDay.innerHTML = currentDay;
 
-        currentMonthButtons.push(btnDay); // Add to array of buttons.
+		currentMonthButtons.push(btnDay); // Add to array of buttons.
 
-        document.getElementById("monthGrid").appendChild(btnDay);
-        //monthCells[currentDay - 1] = btnDay;
-    }
+		document.getElementById("monthGrid").appendChild(btnDay);
+		//monthCells[currentDay - 1] = btnDay;
+	}
 
-    oldMonthAmountOfDays = amountOfDaysInMonth;
-    currentDateDisplay();
+	oldMonthAmountOfDays = amountOfDaysInMonth;
+	currentDateDisplay();
 }
 
 /**
@@ -393,76 +390,76 @@ function updateMonthGrid(amountOfDaysInMonth) {
  * @param {} dayNumber
  */
 function getButtonOfMonth(dayNumber) {
-    for (let index = 0; index < currentMonthButtons.length; index++) {
-        const btn = currentMonthButtons[index];
+	for (let index = 0; index < currentMonthButtons.length; index++) {
+		const btn = currentMonthButtons[index];
 
-        if ((btn.id = "btnDay" + dayNumber)) {
-            return btn;
-        }
-    }
+		if ((btn.id = "btnDay" + dayNumber)) {
+			return btn;
+		}
+	}
 }
 
 function displayRedWeekend() {
-    // Gets the month and year from ID="monthDropDown"
-    let selectedMonth = document.getElementById("monthDropDown").value;
-    let selectedYear = currentYear;
+	// Gets the month and year from ID="monthDropDown"
+	let selectedMonth = document.getElementById("monthDropDown").value;
+	let selectedYear = currentYear;
 
-    document
-        .getElementById("btnNextMonth")
-        .addEventListener("click", displayRedWeekend);
-    document
-        .getElementById("btnPreviousMonth")
-        .addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnNextMonth")
+		.addEventListener("click", displayRedWeekend);
+	document
+		.getElementById("btnPreviousMonth")
+		.addEventListener("click", displayRedWeekend);
 
-    let monthNum = 0;
-    switch (selectedMonth) {
-        case MONTHNAMES[0]:
-            monthNum = 0; // January
-            break;
-        case MONTHNAMES[1]:
-            monthNum = 1; // February
-            break;
-        case MONTHNAMES[2]:
-            monthNum = 2; // Mars etc....
-            break;
-        case MONTHNAMES[3]:
-            monthNum = 3;
-            break;
-        case MONTHNAMES[4]:
-            monthNum = 4;
-            break;
-        case MONTHNAMES[5]:
-            monthNum = 5;
-            break;
-        case MONTHNAMES[6]:
-            monthNum = 6;
-            break;
-        case MONTHNAMES[7]:
-            monthNum = 7;
-            break;
-        case MONTHNAMES[8]:
-            monthNum = 8;
-            break;
-        case MONTHNAMES[9]:
-            monthNum = 9;
-            break;
-        case MONTHNAMES[10]:
-            monthNum = 10;
-            break;
-        case MONTHNAMES[11]:
-            monthNum = 11;
-            break;
-    }
-    for (day = 0; day < 32; day++) {
-        var d = new Date(selectedYear, monthNum, day);
-        if (d.getDay() == 6 || d.getDay() == 0) {
-            try {
-                var buttonId = "btnDay" + day;
-                document.getElementById(buttonId).style.color = "#f05454";
-            } catch (err) {}
-        }
-    }
-    currentDateDisplay();
+	let monthNum = 0;
+	switch (selectedMonth) {
+		case MONTHNAMES[0]:
+			monthNum = 0; // January
+			break;
+		case MONTHNAMES[1]:
+			monthNum = 1; // February
+			break;
+		case MONTHNAMES[2]:
+			monthNum = 2; // Mars etc....
+			break;
+		case MONTHNAMES[3]:
+			monthNum = 3;
+			break;
+		case MONTHNAMES[4]:
+			monthNum = 4;
+			break;
+		case MONTHNAMES[5]:
+			monthNum = 5;
+			break;
+		case MONTHNAMES[6]:
+			monthNum = 6;
+			break;
+		case MONTHNAMES[7]:
+			monthNum = 7;
+			break;
+		case MONTHNAMES[8]:
+			monthNum = 8;
+			break;
+		case MONTHNAMES[9]:
+			monthNum = 9;
+			break;
+		case MONTHNAMES[10]:
+			monthNum = 10;
+			break;
+		case MONTHNAMES[11]:
+			monthNum = 11;
+			break;
+	}
+	for (day = 0; day < 32; day++) {
+		var d = new Date(selectedYear, monthNum, day);
+		if (d.getDay() == 6 || d.getDay() == 0) {
+			try {
+				var buttonId = "btnDay" + day;
+				document.getElementById(buttonId).style.color = "#f05454";
+			} catch (err) {}
+		}
+	}
+	currentDateDisplay();
 }
 
 /**
@@ -470,58 +467,58 @@ function displayRedWeekend() {
  * Receives Date object as parameter
  */
 function getWeekNumber(d) {
-    const dayInMilliseconds = 86400000; // 60 sec * 60 min * 24 hours * 1000 to get a day in ms.
-    //Creates a new date object, to not disturb the original object.
-    let currentDate = new Date(d);
-    currentDate.setHours(0, 0, 0, 0);
-    // Thursday in current week decides the year.
-    currentDate.setDate(
-        currentDate.getDate() + 3 - ((currentDate.getDay() + 6) % 7)
-    );
-    // January 4th is always in week 1.
-    let week1 = new Date(currentDate.getFullYear(), 0, 4);
-    // Adjust to Thursday in week 1 and count number of weeks from date to week1.,
-    return (
-        1 +
-        Math.round(
-            ((currentDate.getTime() - week1.getTime()) / dayInMilliseconds -
-                3 +
-                ((week1.getDay() + 6) % 7)) /
-                7
-        )
-    );
+	const dayInMilliseconds = 86400000; // 60 sec * 60 min * 24 hours * 1000 to get a day in ms.
+	//Creates a new date object, to not disturb the original object.
+	let currentDate = new Date(d);
+	currentDate.setHours(0, 0, 0, 0);
+	// Thursday in current week decides the year.
+	currentDate.setDate(
+		currentDate.getDate() + 3 - ((currentDate.getDay() + 6) % 7)
+	);
+	// January 4th is always in week 1.
+	let week1 = new Date(currentDate.getFullYear(), 0, 4);
+	// Adjust to Thursday in week 1 and count number of weeks from date to week1.,
+	return (
+		1 +
+		Math.round(
+			((currentDate.getTime() - week1.getTime()) / dayInMilliseconds -
+				3 +
+				((week1.getDay() + 6) % 7)) /
+				7
+		)
+	);
 }
 
 /**
  * Function displays week numbers for the month on calendar.
  */
 function displayWeekNumbers() {
-    let weekNumbers = [];
-    let week = 1;
-    let dateBoxes = 42;
-    for (i = 1; i < dateBoxes; i += 7) {
-        weekNumbers[i] = document.createElement("h4");
-        weekNumbers[i].className = "weekNumbers";
-        weekNumbers[i].id = "week" + week++;
-        weekNumbers[i].textContent = getWeekNumber(
-            new Date(currentYear, currentMonth - 1, i)
-        );
-        document.getElementById("weekGrid").appendChild(weekNumbers[i]);
-    }
+	let weekNumbers = [];
+	let week = 1;
+	let dateBoxes = 42;
+	for (i = 1; i < dateBoxes; i += 7) {
+		weekNumbers[i] = document.createElement("h4");
+		weekNumbers[i].className = "weekNumbers";
+		weekNumbers[i].id = "week" + week++;
+		weekNumbers[i].textContent = getWeekNumber(
+			new Date(currentYear, currentMonth - 1, i)
+		);
+		document.getElementById("weekGrid").appendChild(weekNumbers[i]);
+	}
 }
 
 /**
  * Function updates the week numbers.
  */
 function updateWeekNumbers() {
-    let date = 1;
-    let oneWeek = 7;
-    for (i = 1; i <= 6; i++) {
-        document.getElementById("week" + i).textContent = getWeekNumber(
-            new Date(currentYear, currentMonth - 1, date)
-        );
-        date += oneWeek;
-    }
+	let date = 1;
+	let oneWeek = 7;
+	for (i = 1; i <= 6; i++) {
+		document.getElementById("week" + i).textContent = getWeekNumber(
+			new Date(currentYear, currentMonth - 1, date)
+		);
+		date += oneWeek;
+	}
 }
 
 /**
@@ -529,84 +526,84 @@ function updateWeekNumbers() {
  * Takes an Date object as parameter
  */
 function getDayOfTheWeek(date) {
-    return new Date(date).toLocaleString("en-US", {
-        weekday: "long",
-    });
+	return new Date(date).toLocaleString("en-US", {
+		weekday: "long",
+	});
 }
 
 /**
  * Function takes an Date object as parameter and then shows it on the webpage.
  */
 function displaySelectedDatePlan(pickedDate) {
-    let date = pickedDate.getDate();
-    let day = getDayOfTheWeek(pickedDate);
-    let monthName = MONTHNAMES[pickedDate.getMonth()];
+	let date = pickedDate.getDate();
+	let day = getDayOfTheWeek(pickedDate);
+	let monthName = MONTHNAMES[pickedDate.getMonth()];
 
-    document.getElementById("selectedDateLabel").textContent =
-        day + " " + date + " " + monthName;
+	document.getElementById("selectedDateLabel").textContent =
+		day + " " + date + " " + monthName;
 }
 
 /**
  * Function highlights todays date with green color
  */
 function currentDateDisplay() {
-    let todaysDate = new Date();
-    if (
-        currentMonth - 1 == todaysDate.getMonth() &&
-        currentYear == todaysDate.getFullYear()
-    ) {
-        var buttonId = "btnDay" + currentDate;
-        document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
-    }
+	let todaysDate = new Date();
+	if (
+		currentMonth - 1 == todaysDate.getMonth() &&
+		currentYear == todaysDate.getFullYear()
+	) {
+		var buttonId = "btnDay" + currentDate;
+		document.getElementById(buttonId).style.color = "rgb(0, 173, 0)";
+	}
 }
 
 initWebsite();
 displaySelectedDatePlan(new Date()); // Starts with showing todays date
 // monthArray saves the daybuttons to each month
 const monthArray = {
-    January: {},
-    February: {},
-    March: {},
-    April: {},
-    May: {},
-    June: {},
-    July: {},
-    August: {},
-    September: {},
-    October: {},
-    November: {},
-    December: {},
+	January: {},
+	February: {},
+	March: {},
+	April: {},
+	May: {},
+	June: {},
+	July: {},
+	August: {},
+	September: {},
+	October: {},
+	November: {},
+	December: {},
 };
 const years = {};
 const dayArray = {};
 
 function returnMonth(monthString) {
-    switch (monthString) {
-        case "January":
-            return 0; // January
-        case "February":
-            return 1; // February
-        case "March":
-            return 2; // Mars etc....
-        case "April":
-            return 3;
-        case "May":
-            return 4;
-        case "June":
-            return 5;
-        case "July":
-            return 6;
-        case "August":
-            return 7;
-        case "September":
-            return 8;
-        case "October":
-            return 9;
-        case "November":
-            return 10;
-        case "December":
-            return 11;
-    }
+	switch (monthString) {
+		case "January":
+			return 0; // January
+		case "February":
+			return 1; // February
+		case "March":
+			return 2; // Mars etc....
+		case "April":
+			return 3;
+		case "May":
+			return 4;
+		case "June":
+			return 5;
+		case "July":
+			return 6;
+		case "August":
+			return 7;
+		case "September":
+			return 8;
+		case "October":
+			return 9;
+		case "November":
+			return 10;
+		case "December":
+			return 11;
+	}
 }
 
 var storeDateNotes = {};
@@ -686,7 +683,6 @@ function saveNote() {
                     // Change color of button that has saved note
                     dayButton.style.color = saveNoteColor;
                     noteText.placeholder = "Note saved";
-                    console.log((dayButton.style.color));
                     setTimeout(function () {
                         noteText.value = "";
                     }, 1000);
@@ -726,35 +722,35 @@ saveNote();
 
 // year Drop down selection function
 function yearDropDownEvent() {
-    var x = document.getElementById("yearDropDown").value;
-    currentYear = x;
-    today.setMonth(currentMonth);
-    today.setFullYear(currentYear);
+	var x = document.getElementById("yearDropDown").value;
+	currentYear = x;
+	today.setMonth(currentMonth);
+	today.setFullYear(currentYear);
 
-    removeDisabledButtons();
-    featureCalendarDisplay();
+	removeDisabledButtons();
+	featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 
-    displayRedWeekend();
+	displayRedWeekend();
 
-    updateWeekNumbers();
-    saveNote();
+	updateWeekNumbers();
+	saveNote();
 }
 // month drop down selection function
 function monthDropDownEvent() {
-    var dropDownMonth = document.getElementById("monthDropDown").value;
-    currentMonth = MONTHNAMES.indexOf(dropDownMonth) + 1;
-    today.setMonth(currentMonth);
-    today.setFullYear(currentYear);
+	var dropDownMonth = document.getElementById("monthDropDown").value;
+	currentMonth = MONTHNAMES.indexOf(dropDownMonth) + 1;
+	today.setMonth(currentMonth);
+	today.setFullYear(currentYear);
 
-    removeDisabledButtons();
-    featureCalendarDisplay();
+	removeDisabledButtons();
+	featureCalendarDisplay();
 
-    updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
+	updateMonthGrid(getDaysInMonth(currentMonth, currentYear));
 
-    displayRedWeekend();
+	displayRedWeekend();
 
-    updateWeekNumbers();
-    saveNote();
+	updateWeekNumbers();
+	saveNote();
 }
